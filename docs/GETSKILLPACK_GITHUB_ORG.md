@@ -51,6 +51,8 @@ export GETSKILLPACK_ORG_PAT='...'   # не коммитить
 
 Исходник skill: [`skills/getskillpack-github-org/SKILL.md`](../skills/getskillpack-github-org/SKILL.md). Импорт в библиотеку компании — с абсолютного пути к этой папке на машине, где доступен API (board / CEO с правом мутаций skills).
 
+**Пошаговая инструкция для board:** [PAPERCLIP_SKILL_INSTALL_RU.md](PAPERCLIP_SKILL_INSTALL_RU.md).
+
 ## Связанные задачи
 
 - Контекст org: [XDE-3](/XDE/issues/XDE-3).

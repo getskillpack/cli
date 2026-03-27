@@ -27,4 +27,6 @@ description: >
 
 ## Импорт в Paperclip
 
-Локальный путь к каталогу `skills/getskillpack-github-org` этого репозитория — в company skills через `POST /api/companies/{companyId}/skills/import` с `source` = абсолютный путь к каталогу skill.
+Полная пошаговая инструкция для board (права, пути, curl, назначение агентам): [docs/PAPERCLIP_SKILL_INSTALL_RU.md](../../docs/PAPERCLIP_SKILL_INSTALL_RU.md).
+
+Кратко: `POST /api/companies/{companyId}/skills/import` с `source` = абсолютный путь к каталогу `skills/getskillpack-github-org` на машине, где работает API; затем `POST /api/agents/{agentId}/skills/sync` с `desiredSkills`.
