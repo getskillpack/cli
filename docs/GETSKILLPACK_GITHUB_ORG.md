@@ -18,6 +18,7 @@
 
 | Потребитель | Назначение | Classic PAT (ориентир) | Fine-grained (ориентир) |
 |-------------|------------|-------------------------|-------------------------|
+| Локальный агент Paperclip (например Founding Engineer / Cursor heartbeat) | Те же сценарии, что и у человека с PAT в shell: smoke, создание репо, `gh` — см. [AGENT_GITHUB_REPO_WORKFLOW_RU.md](AGENT_GITHUB_REPO_WORKFLOW_RU.md) | По фактическому сценарию (строки ниже) | По фактическому сценарию |
 | CI / ручная проверка org | `GET /user`, `GET /orgs/getskillpack` | `read:org` | Organization: read, при необходимости metadata |
 | Создание репозиториев, настройки репо | API repos под org | `repo`, `write:org` или admin по политике org | Repositories: read/write по списку или всей org |
 | Управление участниками org | Teams, members | `admin:org` | Administration согласно политике GitHub |
