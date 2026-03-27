@@ -43,3 +43,4 @@ git push -u origin main
 
 - Registry API: see `../skpkg-registry/API.md` in this workspace.
 - Naming: `skpkg` toolchain and GitHub org **getskillpack** (onboarding task XDE-3).
+- PAT / CI / scope: [docs/GETSKILLPACK_GITHUB_ORG.md](docs/GETSKILLPACK_GITHUB_ORG.md) ([XDE-10](/XDE/issues/XDE-10)).
