@@ -11,6 +11,7 @@ description: >
 ## Когда использовать
 
 - Нужны операции с org **getskillpack** (репозитории, настройки, API) через PAT.
+- Создание новых репозиториев и первичное оформление под разработку (см. workflow агента).
 - Настройка CI или локального окружения с доступом к org.
 
 ## Правила
@@ -23,8 +24,9 @@ description: >
 ## Действия
 
 1. Прочитать `docs/GETSKILLPACK_GITHUB_ORG.md`.
-2. Для проверки локально: `export GETSKILLPACK_ORG_PAT=...` и `./scripts/gh-org-smoke.sh`.
-3. Для CI: завести secret `GETSKILLPACK_ORG_PAT` и запускать workflow **getskillpack org (manual)**.
+2. Для **создания репозиториев и оформления** под разработку: `docs/AGENT_GITHUB_REPO_WORKFLOW_RU.md` и `./scripts/gh-org-new-repo.sh`.
+3. Для проверки токена: `export GETSKILLPACK_ORG_PAT=...` и `./scripts/gh-org-smoke.sh`.
+4. Для CI: завести secret `GETSKILLPACK_ORG_PAT` и запускать workflow **getskillpack org (manual)**.
 
 ## Импорт в Paperclip
 
