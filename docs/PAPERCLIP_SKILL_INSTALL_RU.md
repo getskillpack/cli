@@ -1,5 +1,7 @@
 # Как установить skill **getskillpack-github-org** в Paperclip (компания)
 
+**Board: куда ввести PAT одной страницей** → [BOARD_PAT_QUICK_RU.md](BOARD_PAT_QUICK_RU.md).
+
 Skill лежит в этом репозитории: каталог [`skills/getskillpack-github-org/`](../skills/getskillpack-github-org/) (файл `SKILL.md` внутри).
 
 ## Кто может установить
