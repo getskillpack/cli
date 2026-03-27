@@ -1,0 +1,33 @@
+{
+  "name": "@getskillpack/cli",
+  "version": "0.1.0",
+  "description": "Command-line client for the skpkg skill registry",
+  "type": "module",
+  "bin": {
+    "skpkg": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "skpkg",
+    "skills",
+    "cli",
+    "openclaw"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}

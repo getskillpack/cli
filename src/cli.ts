@@ -1,0 +1,123 @@
+#!/usr/bin/env node
+import { Command } from "commander";
+import { createWriteStream, readFileSync } from "node:fs";
+import { mkdir } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { pipeline } from "node:stream/promises";
+import { fileURLToPath } from "node:url";
+import { fetchJson, registryBaseUrl } from "./registry.js";
+
+const pkgPath = join(dirname(fileURLToPath(import.meta.url)), "..", "package.json");
+const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as {
+  version: string;
+  description: string;
+};
+
+type ListResponse = {
+  data: Array<{
+    name: string;
+    description?: string;
+    author?: string;
+    latest_version?: string;
+  }>;
+  meta?: { total?: number };
+};
+
+type VersionDetail = {
+  name: string;
+  version: string;
+  archive_url: string;
+  checksum?: string;
+};
+
+type SkillDetail = {
+  name: string;
+  versions?: Array<{ version: string; is_yanked?: boolean }>;
+};
+
+function parseNameVersion(spec: string): { name: string; version?: string } {
+  const at = spec.lastIndexOf("@");
+  if (at <= 0) return { name: spec };
+  return { name: spec.slice(0, at), version: spec.slice(at + 1) };
+}
+
+const program = new Command();
+
+program
+  .name("skpkg")
+  .description(pkg.description)
+  .version(pkg.version, "-V, --version", "print version");
+
+program
+  .command("search")
+  .argument("[query]", "optional search string")
+  .option("-l, --limit <n>", "max rows", "20")
+  .description("search skills in the registry")
+  .action(async (query: string | undefined, opts: { limit: string }) => {
+    const limit = Number(opts.limit) || 20;
+    const params = new URLSearchParams({ limit: String(limit), offset: "0" });
+    if (query) params.set("q", query);
+    const path = `/skills?${params.toString()}`;
+    const body = await fetchJson<ListResponse>(path);
+    if (!body.data?.length) {
+      console.log("No skills found.");
+      return;
+    }
+    for (const row of body.data) {
+      const ver = row.latest_version ? `@${row.latest_version}` : "";
+      console.log(`${row.name}${ver}`);
+      if (row.description) console.log(`  ${row.description}`);
+    }
+    const total = body.meta?.total;
+    if (typeof total === "number") console.log(`\n(${total} total)`);
+  });
+
+program
+  .command("install")
+  .argument("<spec>", "skill name or name@version")
+  .option(
+    "-o, --output <path>",
+    "directory to extract tarball (default: ./.skpkg/skills/<name>)",
+  )
+  .description("download a skill archive from the registry")
+  .action(async (spec: string, opts: { output?: string }) => {
+    const { name, version: pinned } = parseNameVersion(spec);
+    let version = pinned;
+    if (!version) {
+      const detail = await fetchJson<SkillDetail>(`/skills/${encodeURIComponent(name)}`);
+      const active = detail.versions?.filter((v) => !v.is_yanked) ?? [];
+      const latest = active[0]?.version;
+      if (!latest) {
+        throw new Error(`No installable versions for skill "${name}".`);
+      }
+      version = latest;
+    }
+    const meta = await fetchJson<VersionDetail>(
+      `/skills/${encodeURIComponent(name)}/versions/${encodeURIComponent(version)}`,
+    );
+    const outDir =
+      opts.output ?? join(process.cwd(), ".skpkg", "skills", meta.name, meta.version);
+    const fileName = `${meta.name}-${meta.version}.tar.gz`;
+    const dest = join(outDir, fileName);
+    await mkdir(dirname(dest), { recursive: true });
+
+    const archiveRes = await fetch(meta.archive_url);
+    if (!archiveRes.ok) {
+      throw new Error(`Download failed ${archiveRes.status}: ${meta.archive_url}`);
+    }
+    if (!archiveRes.body) throw new Error("Empty response body");
+    await pipeline(archiveRes.body, createWriteStream(dest));
+
+    console.log(`Wrote ${dest}`);
+    if (meta.checksum) console.log(`Checksum (registry): ${meta.checksum}`);
+    console.log("Extract the archive where you need it (tar -xzf …).");
+  });
+
+program
+  .command("config")
+  .description("show effective registry configuration")
+  .action(() => {
+    console.log(`SKPKG_REGISTRY_URL=${registryBaseUrl()}`);
+  });
+
+await program.parseAsync(process.argv);
