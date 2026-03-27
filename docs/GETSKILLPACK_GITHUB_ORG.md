@@ -46,6 +46,7 @@ export GETSKILLPACK_ORG_PAT='...'   # не коммитить
 
 - Значение PAT передаётся через **секреты/ENV у оператора адаптера**, не через описание задачи.
 - Не публиковать токен в [XDE-10](/XDE/issues/XDE-10) и связанных тикетах; для статуса указывать только факт «секрет заведён в …».
+- После установки company skill PAT **не** вводится «в skill»: см. раздел в [PAPERCLIP_SKILL_INSTALL_RU.md](PAPERCLIP_SKILL_INSTALL_RU.md) — *«После установки skill: куда указывать PAT»*.
 
 ## Company skill (Paperclip)
 

@@ -89,9 +89,20 @@ curl -sS "$PAPERCLIP_API_URL/api/agents/<AGENT_ID>/skills" \
 
 Если в вашей сборке Paperclip есть раздел **Company → Skills** (или аналог) с кнопкой **Import** / **Install from path**, шаги те же по смыслу: укажите каталог `skills/getskillpack-github-org` на машине сервера или выберите обнаруженный skill после **scan**. Точные подписи кнопок зависят от версии UI.
 
-## После установки
+## После установки skill: куда указывать PAT
 
-Содержание skill ссылается на [GETSKILLPACK_GITHUB_ORG.md](GETSKILLPACK_GITHUB_ORG.md) (секреты PAT, CI, scopes). Токен PAT по-прежнему **не** хранить в тикетах и в git.
+**Важно:** company skill — это только инструкции для агентов. **Поле «вставить PAT в skill» в Paperclip не существует.** Токен нигде в библиотеке skills не сохраняется; его задаёт **среда выполнения** (GitHub, ваш шелл, процесс адаптера).
+
+| Сценарий | Куда положить значение | Имя |
+|----------|-------------------------|-----|
+| Проверка с ноутбука (`./scripts/gh-org-smoke.sh`, `gh`, `curl`) | Временный `export` в терминале или строка в **локальном** `.env` (файл в `.gitignore`) | `GETSKILLPACK_ORG_PAT` |
+| GitHub Actions (ручной workflow из репо) | **Settings → Secrets and variables → Actions** на репозитории или организации | `GETSKILLPACK_ORG_PAT` |
+| Локальные агенты Paperclip (Cursor / Codex и т.д.) | **Переменные окружения процесса**, которым оператор запускает адаптер: shell profile, systemd `Environment=`, Docker `env`, секреты CI раннера — **не** репозиторий и **не** описание задачи | `GETSKILLPACK_ORG_PAT` |
+| Деплой Paperclip на сервере | Туда же, где вы задаёте прочие секреты для воркеров (секрет-хранилище хоста, `docker-compose` secrets и т.п.) — по политике оператора | `GETSKILLPACK_ORG_PAT` |
+
+**Никогда:** комментарии к [XDE-10](/XDE/issues/XDE-10), README, коммиты, вложения в git.
+
+Полная таблица scope и CI: [GETSKILLPACK_GITHUB_ORG.md](GETSKILLPACK_GITHUB_ORG.md).
 
 ## Связанные тикеты
 

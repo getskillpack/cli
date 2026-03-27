@@ -16,7 +16,8 @@ description: >
 ## Правила
 
 - **Никогда** не вставлять PAT в комментарии задач, README, git или логи.
-- Хранить в `GETSKILLPACK_ORG_PAT` (или эквивалентном секрете CI). См. [docs/GETSKILLPACK_GITHUB_ORG.md](../../docs/GETSKILLPACK_GITHUB_ORG.md).
+- Skill **не хранит** PAT: токен задаётся в **окружении** (shell, GitHub Actions secret, ENV процесса адаптера). Куда именно — [docs/PAPERCLIP_SKILL_INSTALL_RU.md](../../docs/PAPERCLIP_SKILL_INSTALL_RU.md) (*«После установки skill: куда указывать PAT»*).
+- Хранить значение как `GETSKILLPACK_ORG_PAT` (или эквивалентный секрет CI). См. [docs/GETSKILLPACK_GITHUB_ORG.md](../../docs/GETSKILLPACK_GITHUB_ORG.md).
 - Выдавать минимальные GitHub scopes под конкретный сценарий (таблица в том же документе).
 
 ## Действия
