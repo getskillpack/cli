@@ -12,7 +12,8 @@ Predictable releases use **Semantic Versioning** (`MAJOR.MINOR.PATCH`), Git tags
    - [VERSION](../VERSION) (single line, no `v` prefix)
    - [package.json](../package.json) `version` (npm metadata)
    - [cmd/skillget/main.go](../cmd/skillget/main.go) `const version = "…"`
-4. **CI** — Push a branch or PR; `Go` workflow runs `scripts/check-version.sh` so the three values cannot drift.
+4. **Live registry smoke** — When `registry.skpkg.org` is healthy, run GitHub Actions **Registry smoke (live)** (`workflow_dispatch`) or locally: `go test -mod=vendor ./cmd/skillget/ -run 'TestPublicRegistry.*Integration'`. If production is down, note it in the release narrative rather than blocking the tag on this step alone.
+5. **CI** — Push a branch or PR; **Go** workflow runs `scripts/check-version.sh` so the three values cannot drift.
 
 ## Tag and publish
 

@@ -11,12 +11,12 @@ permissions:
   contents: read
 
 jobs:
-  public-registry-search:
+  public-registry-live:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
           go-version: "1.22"
-      - name: SearchSkills integration (no -short)
-        run: go test -mod=vendor -count=1 -v ./cmd/skillget/ -run TestPublicRegistrySearchSkillsIntegration
+      - name: Search + install integrations (no -short)
+        run: go test -mod=vendor -count=1 -v ./cmd/skillget/ -run 'TestPublicRegistry.*Integration'
