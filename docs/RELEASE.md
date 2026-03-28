@@ -4,6 +4,20 @@ Predictable releases use **Semantic Versioning** (`MAJOR.MINOR.PATCH`), Git tags
 
 **Growth cadence** (release rhythm, user-facing changelog blocks, CMO handoff after significant releases): [GROWTH_RELEASE_CADENCE_RU.md](GROWTH_RELEASE_CADENCE_RU.md).
 
+**Doc index:** [docs/README.md](README.md) (user vs maintainer paths).
+
+## Public launch readiness (CLI)
+
+Use this in addition to **Before you cut a release** when the goal is “ready for broad public use”, not only a semver tag:
+
+- **CI** — **Go** workflow green on `main` (includes `go test -short`; does not require live registry).
+- **Docs** — README and [docs/README.md](README.md) point to [QUICKSTART.md](QUICKSTART.md), [ZERO_TO_FIRST_SKILL.md](ZERO_TO_FIRST_SKILL.md), and [PUBLISH_YOUR_SKILL.md](PUBLISH_YOUR_SKILL.md).
+- **Live registry** — **Registry smoke (live)** (`workflow_dispatch` or cron) green recently, or release notes honestly state a production outage (see live smoke step below).
+- **npm** — `npm run test:integration` still matches production expectations when the registry is up (`SKIP_SKILLGET_REGISTRY_INTEGRATION` documented for offline only).
+- **Publish** — `skillget publish` exercised manually with `SKILLGET_REGISTRY_TOKEN` (or equivalent) against the intended registry. **Automated** publish smoke in GitHub Actions would require a **write** token stored as an Actions secret — coordinate with org admins; it is intentionally **not** in the default public CI path.
+
+Org-wide visibility checklist (repos, visibility, legal): [PRIVATE_REPO_PUBLIC_RELEASE_CHECKLIST.md](PRIVATE_REPO_PUBLIC_RELEASE_CHECKLIST.md).
+
 ## Before you cut a release
 
 1. **Contracts** — Confirm HTTP shapes and breaking changes with the registry contract in [`getskillpack/registry` API.md](https://github.com/getskillpack/registry/blob/main/API.md) and with [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) releases if the CLI behavior depends on new APIs.

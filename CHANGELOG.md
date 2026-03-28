@@ -19,6 +19,7 @@ For **user-facing release notes** (RU/EN block per version) and **growth handoff
 
 ### Changed
 
+- [RELEASE.md](docs/RELEASE.md): **Public launch readiness (CLI)** section (CI, docs funnel, live smoke, npm parity, publish vs automated token) and link to [docs/README.md](docs/README.md).
 - Dependency: `skillget-manager` **v0.1.3** (archive download transport/HTTP hints, README; keep in sync with manager releases).
 - CLI: `skillget config -h` / `--help` and rejection of stray arguments on `config`.
 - CLI: `skillget <command> -h` / `--help` on `list`, `search`, `install`, and `publish` prints command-specific flags and exits 0 (was a generic error exit).
