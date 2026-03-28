@@ -2,6 +2,14 @@
 
 Command-line client for the [getskillpack](https://github.com/getskillpack) skill registry (`search`, `install`, `config`).
 
+## Репозитории продукта (org)
+
+| Репозиторий | Назначение |
+|-------------|------------|
+| [registry](https://github.com/getskillpack/registry) | Контракт API и код реестра |
+| [skillget-manager](https://github.com/getskillpack/skillget-manager) | Ядро менеджера (lockfile, клиент, установка) |
+| [cli](https://github.com/getskillpack/cli) | Бинарь `skillget` (обёртка над менеджером) |
+
 ## Package
 
 - **npm name:** `@getskillpack/cli`
@@ -45,7 +53,7 @@ git push -u origin main
 
 ## Related
 
-- Registry API: see `../skpkg-registry/API.md` in this workspace (placeholder registry host `registry.skpkg.org` until a follow-up domain task).
+- Registry API: [registry/API.md](https://github.com/getskillpack/registry/blob/main/API.md) (локально: `../skpkg-registry/API.md`; хост `registry.skpkg.org` — placeholder до отдельной задачи).
 - GitHub org **getskillpack** (onboarding [XDE-3](/XDE/issues/XDE-3)).
 - PAT / CI / scope: [docs/GETSKILLPACK_GITHUB_ORG.md](docs/GETSKILLPACK_GITHUB_ORG.md) ([XDE-10](/XDE/issues/XDE-10)).
 - Установка skill в Paperclip (board): [docs/PAPERCLIP_SKILL_INSTALL_RU.md](docs/PAPERCLIP_SKILL_INSTALL_RU.md).
