@@ -35,4 +35,14 @@ Use this shape on the GitHub **Releases** page so early adopters get a story, no
 
 **Example opening line:** “skillget vX.Y.Z tightens … and stays compatible with registry API … per [registry-api.md](https://github.com/getskillpack/registry/blob/main/docs/registry-api.md).”
 
-Operational checklist for each cut: [GITHUB_GROWTH_CHECKLIST.md](GITHUB_GROWTH_CHECKLIST.md) (stars/CTAs are product surfaces; releases are the habit).
+### GitHub Release narrative — Template B (“Problem → fix → upgrade”)
+
+Use when the headline is a **user-visible break**, a **security** fix, or a **compatibility** correction. Keep to three short blocks; link to `CHANGELOG.md` for the full list.
+
+1. **Problem** — One or two sentences: what broke, for whom, and severity (honest, no FUD).
+2. **Fix** — What we changed in the CLI or contract; name the registry API version or tag if relevant.
+3. **Upgrade** — Exact action: bump tag, rebuild from source, env var or config migration — plus rollback note if any.
+
+**Example opening line:** “skillget vX.Y.Z fixes …; upgrade if you use … with registry ≥ …”
+
+Operational checklist for each cut: [GITHUB_GROWTH_CHECKLIST.md](GITHUB_GROWTH_CHECKLIST.md) (stars/CTAs are product surfaces; releases are the habit). Experiment log for template choice: [GROWTH_EXPERIMENTS_V4.md](GROWTH_EXPERIMENTS_V4.md).

@@ -20,6 +20,7 @@ If a flagship repo is still **private**, complete [PRIVATE_REPO_PUBLIC_RELEASE_C
 
 - [ ] Record **after** counts (same repos); delta vs baseline in the ticket or weekly summary.
 - [ ] Pick **one next experiment** (e.g. asciinema embed in README, OG image tweak, first-run screenshot) and assign owner.
+- [ ] If running structured funnel tests, follow [GROWTH_EXPERIMENTS_V4.md](GROWTH_EXPERIMENTS_V4.md) (landing UTM attribution + README star timing + optional release template B).
 
 ## Flagship repo links
 

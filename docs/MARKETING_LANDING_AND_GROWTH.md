@@ -66,4 +66,5 @@ Goals: **30 seconds** to understand the product, **~5 minutes** to build or inst
 ## Related
 
 - [MARKETING_LANDING_AND_GROWTH_RU.md](MARKETING_LANDING_AND_GROWTH_RU.md) — Russian mirror.
+- [GROWTH_EXPERIMENTS_V4.md](GROWTH_EXPERIMENTS_V4.md) — active measurable experiments (funnel + star CTA + release narrative variant).
 - [AGENT_GITHUB_REPO_WORKFLOW_RU.md](AGENT_GITHUB_REPO_WORKFLOW_RU.md) — PAT hygiene and push.
