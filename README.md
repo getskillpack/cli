@@ -10,13 +10,23 @@ Command-line client for the [getskillpack](https://github.com/getskillpack) skil
 | [skillget-manager](https://github.com/getskillpack/skillget-manager) | Ядро менеджера (lockfile, клиент, установка) |
 | [cli](https://github.com/getskillpack/cli) | Бинарь `skillget` (обёртка над менеджером) |
 
-## Package
+## Нативный бинарник (целевой артефакт, Go 1.22+)
+
+Исходники: `cmd/skillget`. Зависимость: [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager).
+
+```bash
+go build -o skillget ./cmd/skillget
+./skillget --help
+./skillget config
+```
+
+## npm-пакет (исторический прототип)
 
 - **npm name:** `@getskillpack/cli`
-- **binary:** `skillget`
+- **binary:** `skillget` (Node)
 - **Node:** 18+
 
-## Usage
+Целевой поставляемый клиент для экосистемы getskillpack — **скомпилированный `skillget` на Go**; npm-обёртка остаётся опциональной и требует отдельного согласования board.
 
 ```bash
 npm install
