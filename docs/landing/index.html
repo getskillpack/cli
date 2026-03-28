@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>skillget — CLI для экосистемы getskillpack</title>
-  <meta name="description" content="Установите проверенный skill одной командой, зафиксируйте версию в репозитории и воспроизводите окружение для команды и агентов." />
+  <title>skillget — CLI for the getskillpack ecosystem</title>
+  <meta name="description" content="Install a vetted skill in one command, pin versions in your repo, and reproduce the same setup for your team and agents — without zip handoffs." />
 
-  <!-- Open Graph / соцсети (абсолютные URL — при деплое на GitHub Pages) -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="skillget — CLI для экосистемы getskillpack" />
-  <meta property="og:description" content="Пакетный менеджер для skills: search, install, lockfile. Официальный клиент org getskillpack." />
+  <meta property="og:title" content="skillget — CLI for the getskillpack ecosystem" />
+  <meta property="og:description" content="Package manager for skills: search, install, lockfile. Official client for the getskillpack org." />
   <meta property="og:url" content="https://getskillpack.github.io/cli/" />
   <meta property="og:site_name" content="getskillpack" />
   <meta property="og:image" content="https://getskillpack.github.io/cli/og-card.svg" />
-  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="skillget — CLI для экосистемы getskillpack" />
-  <meta name="twitter:description" content="Пакетный менеджер для skills: search, install, lockfile." />
+  <meta name="twitter:title" content="skillget — CLI for the getskillpack ecosystem" />
+  <meta name="twitter:description" content="Package manager for skills: search, install, lockfile." />
   <meta name="twitter:image" content="https://getskillpack.github.io/cli/og-card.svg" />
 
   <link rel="canonical" href="https://getskillpack.github.io/cli/" />
@@ -76,9 +75,21 @@
     .lead {
       font-size: 1.15rem;
       color: var(--muted);
-      max-width: 38rem;
+      max-width: 40rem;
       margin: 0 0 1.75rem;
     }
+    .north {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 42rem;
+      margin: 0 0 1.5rem;
+      padding: 1rem 1.15rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      border-left: 3px solid var(--accent);
+    }
+    .north strong { color: var(--text); }
     .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
     .btn {
       display: inline-flex;
@@ -126,9 +137,7 @@
     }
     .flow-card strong { display: block; font-size: 0.95rem; margin-bottom: 0.35rem; }
     .flow-card span { font-size: 0.8rem; color: var(--muted); }
-    .arrow {
-      display: none;
-    }
+    .arrow { display: none; }
     @media (min-width: 720px) {
       .flow { grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; }
       .arrow { display: block; color: var(--muted); font-size: 1.25rem; }
@@ -161,6 +170,29 @@
     }
     .card h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
     .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .metrics-table-wrap {
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+    table.metrics {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    table.metrics th,
+    table.metrics td {
+      text-align: left;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--border);
+      vertical-align: top;
+    }
+    table.metrics th {
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+    }
+    table.metrics td { color: var(--muted); }
+    table.metrics td:first-child { color: var(--text); font-weight: 500; }
     footer {
       padding: 2.5rem 0 3rem;
       color: var(--muted);
@@ -178,26 +210,30 @@
   <header class="hero">
     <div class="wrap">
       <span class="badge">getskillpack · skillget</span>
-      <h1>Пакетный менеджер для skills агентов и IDE</h1>
+      <h1>A package manager for agent and IDE skills</h1>
       <p class="lead">
-        Установите проверенный skill одной командой, зафиксируйте версию в репозитории и воспроизводите окружение для команды и агентов — без копирования zip и ручных инструкций.
+        Install a vetted skill in one command, pin versions in your repository, and reproduce the same setup for your team and agents — without zip bundles or ad-hoc runbooks.
+      </p>
+      <p class="north" id="north-star">
+        <strong>North star.</strong> We are building in the open so teams can trust, fork, and contribute.
+        Rough compass for the org: on the order of <strong>10k cumulative GitHub stars</strong> across our flagship public repositories over the next couple of years — a <em>directional</em> signal of adoption, not a quarterly target baked into the product roadmap.
       </p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="#quick-start">Установить CLI</a>
-        <a class="btn btn-ghost" href="https://github.com/getskillpack/registry/blob/main/API.md" target="_blank" rel="noopener">Документация API registry</a>
-        <a class="btn btn-ghost" href="https://github.com/getskillpack/cli" target="_blank" rel="noopener">Исходники на GitHub</a>
+        <a class="btn btn-primary" href="#quick-start">Install the CLI</a>
+        <a class="btn btn-ghost" href="https://github.com/getskillpack/registry/blob/main/docs/registry-api.md" target="_blank" rel="noopener">Registry API docs</a>
+        <a class="btn btn-ghost" href="https://github.com/getskillpack/cli" target="_blank" rel="noopener">Source on GitHub</a>
       </div>
     </div>
   </header>
 
   <section id="how">
     <div class="wrap">
-      <h2>Как это работает</h2>
-      <p class="note" style="margin-top:0">Цепочка от реестра до каталога в вашем репозитории.</p>
-      <div class="flow" aria-label="Схема: registry, CLI, lockfile, каталог">
+      <h2>How it works</h2>
+      <p class="note" style="margin-top:0">From the registry to a pinned install tree in your repo.</p>
+      <div class="flow" aria-label="Flow: registry, CLI, lockfile, install directory">
         <div class="flow-card">
           <strong>Registry</strong>
-          <span>HTTP API и метаданные skills</span>
+          <span>HTTP API and skill metadata</span>
         </div>
         <span class="arrow" aria-hidden="true">→</span>
         <div class="flow-card">
@@ -207,12 +243,12 @@
         <span class="arrow" aria-hidden="true">→</span>
         <div class="flow-card">
           <strong>skills.lock</strong>
-          <span>закреплённые версии</span>
+          <span>pinned versions</span>
         </div>
         <span class="arrow" aria-hidden="true">→</span>
         <div class="flow-card">
           <strong>.skillget/</strong>
-          <span>локальный каталог установки</span>
+          <span>local install tree</span>
         </div>
       </div>
     </div>
@@ -220,32 +256,73 @@
 
   <section id="quick-start">
     <div class="wrap">
-      <h2>Быстрый старт</h2>
-      <p class="note" style="margin-top:0">Цель: за ~5 минут собрать бинарь и поставить первый skill. Реестр по умолчанию: <code>https://registry.skpkg.org/api/v1</code> (можно переопределить).</p>
-      <pre><span class="c"># Сборка Go-клиента (рекомендуемый путь)</span>
+      <h2>Quick start</h2>
+      <p class="note" style="margin-top:0">Goal: build the Go client and install a first skill in about five minutes. Default registry base: <code>https://registry.skpkg.org/api/v1</code> (override when needed).</p>
+      <pre><span class="c"># Build the Go client (recommended path)</span>
 <span class="k">git</span> clone https://github.com/getskillpack/cli.git && <span class="k">cd</span> cli
 <span class="k">go</span> build -o skillget ./cmd/skillget
 
-<span class="c"># Локальный или кастомный registry</span>
+<span class="c"># Local or custom registry</span>
 <span class="k">export</span> SKILLGET_REGISTRY_URL=http://localhost:3000/api/v1
 
 <span class="k">./skillget</span> search
-<span class="k">./skillget</span> install &lt;имя-skill&gt;</pre>
-      <p class="note">После <code>install</code> CLI обновляет <code>skills.lock</code> и кладёт артефакты в <code>.skillget/skills/&lt;name&gt;/&lt;version&gt;/</code>.</p>
+<span class="k">./skillget</span> install &lt;skill-name&gt;</pre>
+      <p class="note">After <code>install</code>, the CLI updates <code>skills.lock</code> and writes artifacts under <code>.skillget/skills/&lt;name&gt;/&lt;version&gt;/</code>.</p>
+    </div>
+  </section>
+
+  <section id="metrics">
+    <div class="wrap">
+      <h2>Signals we track (funnel + trust)</h2>
+      <p class="note" style="margin-top:0">We review these on a <strong>weekly</strong> cadence for the org (dashboard or short doc for board) — not on every automation heartbeat. Traffic and clone charts come from <a href="https://github.com/getskillpack/cli/graphs/traffic" target="_blank" rel="noopener">GitHub Insights</a> per repository where enabled.</p>
+      <div class="metrics-table-wrap">
+        <table class="metrics" aria-label="Growth and funnel metrics">
+          <thead>
+            <tr>
+              <th scope="col">Signal</th>
+              <th scope="col">What it tells us</th>
+              <th scope="col">Primary source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GitHub stars</td>
+              <td>Discovery and trust in the open; rolls up toward the long-horizon org compass above.</td>
+              <td>Repo stargazer counts (e.g. <a href="https://github.com/getskillpack/cli" target="_blank" rel="noopener">cli</a>, <a href="https://github.com/getskillpack/registry" target="_blank" rel="noopener">registry</a>)</td>
+            </tr>
+            <tr>
+              <td>Clones &amp; visitors</td>
+              <td>Interest before someone stars or installs; highlights README and landing effectiveness.</td>
+              <td>GitHub → Insights → Traffic (per repo)</td>
+            </tr>
+            <tr>
+              <td>Referrers / site traffic</td>
+              <td>Which surfaces send people to the README, releases, or this landing (when Pages analytics are available).</td>
+              <td>GitHub Traffic + Pages (as configured)</td>
+            </tr>
+            <tr>
+              <td>Releases &amp; tags</td>
+              <td>Predictability for early adopters; pairs with changelog quality.</td>
+              <td>Releases tab per repository</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Full playbook, anti-spam rules, and handoff checklist: <a href="https://github.com/getskillpack/cli/blob/main/docs/MARKETING_LANDING_AND_GROWTH.md">MARKETING_LANDING_AND_GROWTH.md</a> (English) · <a href="https://github.com/getskillpack/cli/blob/main/docs/MARKETING_LANDING_AND_GROWTH_RU.md">Russian mirror</a> for internal notes.</p>
     </div>
   </section>
 
   <section id="trust">
     <div class="wrap">
-      <h2>Доверие и прозрачность</h2>
+      <h2>Trust and transparency</h2>
       <div class="grid-2">
         <div class="card">
-          <h3>Лицензия и код</h3>
-          <p>CLI и сопутствующие пакеты в org публикуются с открытым исходным кодом (см. LICENSE в каждом репозитории). Мы не обещаем публичный SLA до релиза — сроки и приоритеты отражаем в Issues.</p>
+          <h3>License and source</h3>
+          <p>CLI and related packages in the org ship as open source (see LICENSE in each repo). We do not publish a public SLA before GA — timelines and priorities show up in Issues and releases.</p>
         </div>
         <div class="card">
-          <h3>Дорожная карта</h3>
-          <p>Следите за задачами и релизами в <a href="https://github.com/getskillpack" target="_blank" rel="noopener">организации getskillpack</a> на GitHub: регулярные теги на <code>cli</code>, <code>registry</code> и <code>skillget-manager</code> — ориентир для ранних адоптеров.</p>
+          <h3>Roadmap</h3>
+          <p>Follow work and releases across the <a href="https://github.com/getskillpack" target="_blank" rel="noopener">getskillpack</a> organization: regular tags on <code>cli</code>, <code>registry</code>, and <code>skillget-manager</code> are the adoption signal for early users.</p>
         </div>
       </div>
     </div>
@@ -253,8 +330,8 @@
 
   <section id="authors">
     <div class="wrap">
-      <h2>Для авторов skills</h2>
-      <p>Контракт публикации и формат метаданных описаны в репозитории registry. Начните с <a href="https://github.com/getskillpack/registry/blob/main/API.md" target="_blank" rel="noopener">API.md</a> и исходников <a href="https://github.com/getskillpack/registry" target="_blank" rel="noopener">getskillpack/registry</a>.</p>
+      <h2>For skill authors</h2>
+      <p>Publishing contract and metadata formats live in the registry repository. Start from <a href="https://github.com/getskillpack/registry/blob/main/docs/registry-api.md" target="_blank" rel="noopener">registry-api.md</a> and the <a href="https://github.com/getskillpack/registry" target="_blank" rel="noopener">getskillpack/registry</a> sources.</p>
     </div>
   </section>
 
@@ -262,10 +339,10 @@
     <div class="wrap">
       <div class="links">
         <a href="https://github.com/getskillpack">GitHub org</a>
-        <a href="https://github.com/getskillpack/cli">Репозиторий cli</a>
-        <a href="https://github.com/getskillpack/registry/blob/main/API.md">Registry API</a>
+        <a href="https://github.com/getskillpack/cli">cli repository</a>
+        <a href="https://github.com/getskillpack/registry/blob/main/docs/registry-api.md">Registry API</a>
       </div>
-      <p>Канонические формулировки и KPI роста — в <a href="https://github.com/getskillpack/cli/blob/main/docs/MARKETING_LANDING_AND_GROWTH_RU.md">MARKETING_LANDING_AND_GROWTH_RU.md</a>. Статус публичного хоста документации и аналитики согласуется с board.</p>
+      <p>Canonical copy and KPI cadence: <a href="https://github.com/getskillpack/cli/blob/main/docs/MARKETING_LANDING_AND_GROWTH.md">MARKETING_LANDING_AND_GROWTH.md</a>. Public docs host and analytics scope are agreed with board.</p>
     </div>
   </footer>
 </body>

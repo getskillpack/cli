@@ -10,8 +10,8 @@ Command-line client for the [getskillpack](https://github.com/getskillpack) skil
 
 ## Лендинг
 
-- **Статическая страница (hero, как работает, quick start, доверие, футер):** [docs/landing/index.html](docs/landing/index.html) — откройте файл в браузере или задеплойте через GitHub Pages (workflow [.github/workflows/deploy-landing.yml](.github/workflows/deploy-landing.yml); канонический URL: `https://getskillpack.github.io/cli/`).
-- **Тексты и чеклист:** [docs/MARKETING_LANDING_AND_GROWTH_RU.md](docs/MARKETING_LANDING_AND_GROWTH_RU.md).
+- **Статическая страница (hero, как работает, quick start, метрики, доверие, футер):** [docs/landing/index.html](docs/landing/index.html) — публичный copy на **английском**; откройте файл в браузере или задеплойте через GitHub Pages (workflow [.github/workflows/deploy-landing.yml](.github/workflows/deploy-landing.yml); канонический URL: `https://getskillpack.github.io/cli/`).
+- **Тексты и KPI (EN, для board/публичики):** [docs/MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md) · внутренний зеркальный документ: [docs/MARKETING_LANDING_AND_GROWTH_RU.md](docs/MARKETING_LANDING_AND_GROWTH_RU.md).
 
 ## Демо установки (визуально)
 
