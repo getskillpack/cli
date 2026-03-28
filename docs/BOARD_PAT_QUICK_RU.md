@@ -9,7 +9,7 @@ GitHub → ваш репозиторий → **Settings** → **Secrets and vari
 
 Дальше запускаете workflow **getskillpack org (manual)** (или свой), который читает этот secret.
 
-Workflow **Go** в этом репозитории: job **`skillget (vendor)`** собирает с **`-mod=vendor`** и **не требует** секрета (в т.ч. на PR из форков). Job **`skillget (remote modules)`** запускается **только если** `GETSKILLPACK_ORG_PAT` задан, проверяет загрузку модулей с GitHub и что каталог **`vendor/`** совпадает с `go.mod`. См. §5.
+Workflow **Go** в этом репозитории: job **`skillget (vendor)`** собирает с **`-mod=vendor`** и **не требует** секрета (в т.ч. на PR из форков). Job **`skillget (remote modules)`** всегда стартует; если `GETSKILLPACK_ORG_PAT` **не** задан, шаги проверки пропускаются (job зелёный). При **заданном** секрете выполняются `go mod download`, сборка без `-mod=vendor` и проверка, что **`vendor/`** совпадает с `go.mod`. См. §5.
 
 ## 2. Чтобы агент Paperclip (Cursor) видел токен при работе
 
@@ -74,4 +74,4 @@ Workflow **Go** в этом репозитории: job **`skillget (vendor)`** 
 2. `go mod tidy` при необходимости, затем **`go mod vendor`**.
 3. Закоммитить изменения **`go.mod`**, **`go.sum`** и **`vendor/`**.
 
-Без шага 2 job **`skillget (remote modules)`** (когда секрет уже есть) упадёт на проверке `git diff vendor/`.
+Без шага 2 шаг **`vendor in sync with go.mod`** (когда в репозитории уже задан `GETSKILLPACK_ORG_PAT`) упадёт на проверке `git diff vendor/`.

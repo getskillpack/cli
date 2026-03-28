@@ -25,28 +25,54 @@ jobs:
       - run: bash scripts/check-version.sh
 
   # When GETSKILLPACK_ORG_PAT is configured: verify the module graph without vendor and ensure vendor/ matches go.mod.
+  # Gate via first step (job-level `if` on secrets is unreliable in Actions).
   skillget-remote:
     name: skillget (remote modules)
     runs-on: ubuntu-latest
-    if: ${{ secrets.GETSKILLPACK_ORG_PAT != '' }}
     env:
       GOPRIVATE: github.com/getskillpack/*
       GONOSUMDB: github.com/getskillpack/*
     steps:
+      - id: gate
+        env:
+          PAT: ${{ secrets.GETSKILLPACK_ORG_PAT }}
+        run: |
+          if [ -z "$PAT" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Skip remote verification (no repo secret)
+        if: steps.gate.outputs.skip == 'true'
+        run: |
+          echo "GETSKILLPACK_ORG_PAT is not set — skipping remote module + vendor sync job."
+          echo "The vendor job above is the default green CI path; add the secret to enable this check."
       - uses: actions/checkout@v4
+        if: steps.gate.outputs.skip == 'false'
       - name: Auth GitHub for private Go modules
+        if: steps.gate.outputs.skip == 'false'
         env:
           TOKEN: ${{ secrets.GETSKILLPACK_ORG_PAT }}
         run: |
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "https://github.com/"
       - uses: actions/setup-go@v5
+        if: steps.gate.outputs.skip == 'false'
         with:
           go-version: "1.22"
-      - run: go mod download
-      - run: go build -v ./...
-      - run: go vet ./...
-      - run: bash scripts/check-version.sh
+      - name: go mod download
+        if: steps.gate.outputs.skip == 'false'
+        run: go mod download
+      - name: go build
+        if: steps.gate.outputs.skip == 'false'
+        run: go build -v ./...
+      - name: go vet
+        if: steps.gate.outputs.skip == 'false'
+        run: go vet ./...
+      - name: check-version
+        if: steps.gate.outputs.skip == 'false'
+        run: bash scripts/check-version.sh
       - name: vendor in sync with go.mod
+        if: steps.gate.outputs.skip == 'false'
         run: |
           go mod vendor
           git diff --exit-code vendor/ || (
