@@ -24,3 +24,15 @@ Create a **GitHub Release** from the tag (release notes can summarize `CHANGELOG
 ## Artifacts
 
 Prebuilt binaries are not yet automated in CI; users build with `go build` as documented in [QUICKSTART.md](QUICKSTART.md). When board approves, add a tag-triggered workflow (for example GoReleaser) without embedding secrets in the repository.
+
+## GitHub Release narrative (template)
+
+Use this shape on the GitHub **Releases** page so early adopters get a story, not only a tag. Replace placeholders; keep it honest and short.
+
+1. **What shipped** — One paragraph: user-visible commands, fixes, or contract alignment with the registry.
+2. **Why it matters** — One paragraph: who should upgrade (CLI users, integrators, skill authors) and any migration note.
+3. **What’s next** — Bullets: next likely focus (e.g. binary publishing, docs URL), with links to Issues if they exist.
+
+**Example opening line:** “skillget vX.Y.Z tightens … and stays compatible with registry API … per [registry-api.md](https://github.com/getskillpack/registry/blob/main/docs/registry-api.md).”
+
+Operational checklist for each cut: [GITHUB_GROWTH_CHECKLIST.md](GITHUB_GROWTH_CHECKLIST.md) (stars/CTAs are product surfaces; releases are the habit).

@@ -2,6 +2,8 @@
 
 Command-line client for the [getskillpack](https://github.com/getskillpack) skill registry: **`list`**, **`search`**, **`install`**, **`publish`**, **`config`**.
 
+**If this project is useful to you:** starring [`getskillpack/cli`](https://github.com/getskillpack/cli), [`getskillpack/registry`](https://github.com/getskillpack/registry), and [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) on GitHub helps other teams discover the ecosystem — no spam, no bots, just signal. Growth framing and cadence: [docs/MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md).
+
 ## User docs (English)
 
 - **[Quick start](docs/QUICKSTART.md)** — build, env vars, `search` / `install` / `config`.
