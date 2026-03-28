@@ -62,7 +62,8 @@ Usage:
 Environment:
   SKILLGET_REGISTRY_URL   registry API base (optional)
   SKPKG_REGISTRY_URL      legacy fallback for registry URL
-  SKILLGET_REGISTRY_TOKEN bearer token for publish (or SKILLGET_TOKEN)
+  SKILLGET_REGISTRY_TOKEN bearer token for skillget publish (or SKILLGET_TOKEN)
+                          search/install work anonymously unless the registry requires auth
 
 `)
 }

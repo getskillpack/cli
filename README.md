@@ -195,6 +195,14 @@ git remote add origin git@github.com:getskillpack/cli.git
 git push -u origin main
 ```
 
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+## Security
+
+Coordinated disclosure: [SECURITY.md](SECURITY.md).
+
 ## Related
 
 - **Registry API (канон):** [docs/registry-api.md](https://github.com/getskillpack/registry/blob/main/docs/registry-api.md); на развёрнутом реестре: `GET /docs/registry-api` (Markdown). Корневой [API.md](https://github.com/getskillpack/registry/blob/main/API.md) — короткий указатель для старых ссылок.

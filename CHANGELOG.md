@@ -11,6 +11,7 @@ For **user-facing release notes** (RU/EN block per version) and **growth handoff
 
 ### Added
 
+- Root `LICENSE` (MIT, aligned with `@getskillpack/cli` metadata) and `SECURITY.md` for coordinated disclosure ahead of public repo visibility.
 - Integration test opt-out: set `SKIP_SKILLGET_REGISTRY_INTEGRATION=1` to skip the public-registry smoke test (offline sandboxes only; keep enabled in CI that must assert `registry.skpkg.org`).
 - English onboarding tutorial [docs/ZERO_TO_FIRST_SKILL.md](docs/ZERO_TO_FIRST_SKILL.md): install → first skill → verify, with troubleshooting; linked from README, Quick start, example catalog, and the static landing page.
 
