@@ -27,7 +27,7 @@ go build -o skillget ./cmd/skillget
 ./skillget -V
 ```
 
-**Tests:** `go test -mod=vendor ./...` includes a live call to the default public registry. Offline: `SKIP_SKILLGET_REGISTRY_INTEGRATION=1 go test -mod=vendor ./...` (same variable as `npm run test:integration`).
+**Tests:** `go test -mod=vendor -short ./...` is what CI runs (no live registry). Full smoke against production: `go test -mod=vendor ./cmd/skillget/ -run TestPublicRegistrySearchSkillsIntegration`. Offline: prefix with `SKIP_SKILLGET_REGISTRY_INTEGRATION=1` (same variable as `npm run test:integration`).
 
 **Private GitHub modules:** while `skillget-manager` is fetched from the private org, set `GOPRIVATE` / `GONOSUMDB` and git credentials for `github.com` (HTTPS or SSH). Maintainer-oriented checklist: [BOARD_PAT_QUICK_RU.md](BOARD_PAT_QUICK_RU.md) (§4 and local build notes). GitHub Actions needs repository secret `GETSKILLPACK_ORG_PAT` — same doc, §1.
 

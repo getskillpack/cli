@@ -11,7 +11,7 @@ For **user-facing release notes** (RU/EN block per version) and **growth handoff
 
 ### Added
 
-- Go integration test `cmd/skillget/registry_integration_test.go`: live `SearchSkills` against the default public registry (opt out with `SKIP_SKILLGET_REGISTRY_INTEGRATION=1`, same env as the npm integration test). `go test -mod=vendor ./...` runs in the **Go** workflow.
+- Go integration test `cmd/skillget/registry_integration_test.go`: live `SearchSkills` against the default public registry. Skipped when `SKIP_SKILLGET_REGISTRY_INTEGRATION=1` (npm parity) or under `go test -short` (default in **Go** CI so registry outages do not block merges). Full run: `go test -mod=vendor ./cmd/skillget/ -run TestPublicRegistrySearchSkillsIntegration`.
 - Root `LICENSE` (MIT, aligned with `@getskillpack/cli` metadata) and `SECURITY.md` for coordinated disclosure ahead of public repo visibility.
 - Integration test opt-out: set `SKIP_SKILLGET_REGISTRY_INTEGRATION=1` to skip the public-registry smoke test (offline sandboxes only; keep enabled in CI that must assert `registry.skpkg.org`).
 - English onboarding tutorial [docs/ZERO_TO_FIRST_SKILL.md](docs/ZERO_TO_FIRST_SKILL.md): install → first skill → verify, with troubleshooting; linked from README, Quick start, example catalog, and the static landing page.
