@@ -4,5 +4,5 @@ go 1.22
 
 require github.com/getskillpack/skillget-manager v0.0.0-20260328004417-7c511f3965cf
 
-// Local monorepo (Paperclip workspace): drop this replace after publishing skillget-manager and run: go get github.com/getskillpack/skillget-manager@<new-commit>
+// Paperclip workspace: sibling ../skillget-manager (main @ 222473d776de) overrides this require. When publishing: go get github.com/getskillpack/skillget-manager@main && drop replace.
 replace github.com/getskillpack/skillget-manager => ../skillget-manager
