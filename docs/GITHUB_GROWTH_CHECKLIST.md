@@ -13,7 +13,7 @@ If a flagship repo is still **private**, complete [PRIVATE_REPO_PUBLIC_RELEASE_C
 ## During the sprint
 
 - [ ] **Surfaces:** landing ([docs/landing/index.html](landing/index.html)), README, and release notes link clearly to install path + registry docs + honest “star if useful” line.
-- [ ] **Releases:** cut or plan a tagged release where meaningful; publish **GitHub Release** text using the template in [RELEASE.md](RELEASE.md#github-release-narrative-template).
+- [ ] **Releases:** cut or plan a tagged release where meaningful; publish **GitHub Release** text using the template in [RELEASE.md](RELEASE.md#github-release-narrative-template). For semver cadence, user-facing changelog shape, and **CMO handoff** after significant releases, use [GROWTH_RELEASE_CADENCE_RU.md](GROWTH_RELEASE_CADENCE_RU.md).
 - [ ] **Content:** one thoughtful note per channel per release (issue, blog, social) — quality over volume.
 
 ## After the sprint

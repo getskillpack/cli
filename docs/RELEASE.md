@@ -2,6 +2,8 @@
 
 Predictable releases use **Semantic Versioning** (`MAJOR.MINOR.PATCH`), Git tags `vMAJOR.MINOR.PATCH`, and an updated **Keep a Changelog**-style [CHANGELOG.md](../CHANGELOG.md).
 
+**Growth cadence** (release rhythm, user-facing changelog blocks, CMO handoff after significant releases): [GROWTH_RELEASE_CADENCE_RU.md](GROWTH_RELEASE_CADENCE_RU.md).
+
 ## Before you cut a release
 
 1. **Contracts** — Confirm HTTP shapes and breaking changes with the registry contract in [`getskillpack/registry` API.md](https://github.com/getskillpack/registry/blob/main/API.md) and with [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) releases if the CLI behavior depends on new APIs.

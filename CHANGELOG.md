@@ -5,6 +5,8 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+For **user-facing release notes** (RU/EN block per version) and **growth handoff** to CMO, see [docs/GROWTH_RELEASE_CADENCE_RU.md](docs/GROWTH_RELEASE_CADENCE_RU.md).
+
 ## [Unreleased]
 
 ### Added
