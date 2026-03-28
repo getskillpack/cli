@@ -54,6 +54,10 @@ git push -u origin main
 
 Если только HTTPS и PAT: используйте кратковременно `gh auth login` с `GH_TOKEN` или credential helper; **не** добавляйте в репозиторий команды вида `https://...token@github.com/...`.
 
+## Публикация репозитория (private → public)
+
+Агент **не** меняет видимость репозитория. Готовьте ветку/доки по чеклисту [PRIVATE_REPO_PUBLIC_RELEASE_CHECKLIST.md](PRIVATE_REPO_PUBLIC_RELEASE_CHECKLIST.md); переключение в GitHub выполняет board по отдельному тикету.
+
 ## Что агент делегирует человеку
 
 - Политики org (обязательный 2FA, правила для веток по умолчанию на уровне org).

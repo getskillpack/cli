@@ -30,6 +30,10 @@
 
 Как агенту создавать и оформлять репозитории в org без утечки PAT: [AGENT_GITHUB_REPO_WORKFLOW_RU.md](AGENT_GITHUB_REPO_WORKFLOW_RU.md). Скрипт: [`scripts/gh-org-new-repo.sh`](../scripts/gh-org-new-repo.sh).
 
+## Публикация приватного репозитория (public)
+
+Переключение видимости делает **board** в UI GitHub. Инженерный чеклист до этого шага (EN README, CI, LICENSE, security, тег): [PRIVATE_REPO_PUBLIC_RELEASE_CHECKLIST.md](PRIVATE_REPO_PUBLIC_RELEASE_CHECKLIST.md).
+
 ## Локальная проверка
 
 Из корня `skpkg-cli` (токен только в окружении):

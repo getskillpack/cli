@@ -2,6 +2,8 @@
 
 North-star compass: cumulative **GitHub stars** across flagship public repos as a long-horizon trust signal (see [MARKETING_LANDING_AND_GROWTH.md](MARKETING_LANDING_AND_GROWTH.md)). This file is the **do** list; anti-goals (no bots, no bought stars) live in that doc.
 
+If a flagship repo is still **private**, complete [PRIVATE_REPO_PUBLIC_RELEASE_CHECKLIST.md](PRIVATE_REPO_PUBLIC_RELEASE_CHECKLIST.md) before relying on public growth metrics.
+
 ## Before a sprint
 
 - [ ] Record **baseline** stargazer counts for `cli`, `registry`, `skillget-manager` (API or UI); note date in the tracking ticket or weekly board doc.
