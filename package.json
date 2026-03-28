@@ -10,7 +10,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test:integration": "npm run build && node test/integration-registry-install.mjs"
   },
   "engines": {
     "node": ">=18"

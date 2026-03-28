@@ -1,8 +1,10 @@
 #!/usr/bin/env node
+import { createHash } from "node:crypto";
 import { Command } from "commander";
 import { createWriteStream, readFileSync, writeFileSync } from "node:fs";
-import { mkdir } from "node:fs/promises";
+import { mkdir, unlink } from "node:fs/promises";
 import { dirname, join } from "node:path";
+import { Transform } from "node:stream";
 import { pipeline } from "node:stream/promises";
 import { fileURLToPath } from "node:url";
 import {
@@ -62,19 +64,78 @@ type VersionDetail = {
   checksum?: string;
 };
 
-type SkillDetail = {
-  name: string;
-  repository_url?: string | null;
-  homepage?: string | null;
-  dependencies?: Array<{ name: string; range?: string }>;
-  latest_version?: string | null;
-  versions?: Array<{ version: string; is_yanked?: boolean }>;
-};
-
 function parseNameVersion(spec: string): { name: string; version?: string } {
   const at = spec.lastIndexOf("@");
   if (at <= 0) return { name: spec };
   return { name: spec.slice(0, at), version: spec.slice(at + 1) };
+}
+
+/** Registry returns `sha256:<64 hex>` per registry-api.md. */
+function parseRegistrySha256(checksum: string | undefined): string | undefined {
+  if (!checksum?.trim()) return undefined;
+  const s = checksum.trim();
+  const m = /^sha256:([a-fA-F0-9]{64})$/.exec(s);
+  if (!m) {
+    throw new Error(
+      `Invalid registry checksum (expected sha256:<64 hex>): ${JSON.stringify(s.slice(0, 72))}`,
+    );
+  }
+  return m[1].toLowerCase();
+}
+
+/** Resolve latest version via `GET /skills` (search), exact `name` match on a row. */
+async function resolveLatestVersionFromList(name: string): Promise<string> {
+  const params = new URLSearchParams({
+    limit: "100",
+    offset: "0",
+    q: name,
+  });
+  const body = await fetchJson<ListResponse>(`/skills?${params.toString()}`);
+  const row = body.data?.find((r) => r.name === name);
+  const latest = row?.latest_version?.trim();
+  if (!latest) {
+    throw new Error(
+      `No installable versions for skill "${name}" (not found or no latest_version in GET /skills).`,
+    );
+  }
+  return latest;
+}
+
+async function downloadArchiveWithSha256Verify(
+  archiveUrl: string,
+  dest: string,
+  expectedHex: string | undefined,
+): Promise<string> {
+  const archiveRes = await fetch(archiveUrl);
+  if (!archiveRes.ok) {
+    throw new Error(`Download failed ${archiveRes.status}: ${archiveUrl}`);
+  }
+  if (!archiveRes.body) throw new Error("Empty response body");
+
+  const hash = createHash("sha256");
+  const hasher = new Transform({
+    transform(chunk: Buffer, _enc, cb) {
+      hash.update(chunk);
+      this.push(chunk);
+      cb();
+    },
+  });
+
+  try {
+    await pipeline(archiveRes.body, hasher, createWriteStream(dest));
+  } catch (e) {
+    await unlink(dest).catch(() => {});
+    throw e;
+  }
+
+  const digest = hash.digest("hex");
+  if (expectedHex) {
+    if (digest !== expectedHex) {
+      await unlink(dest).catch(() => {});
+      throw new Error(`Checksum mismatch: expected ${expectedHex}, got ${digest} (sha256).`);
+    }
+  }
+  return digest;
 }
 
 async function runListOrSearch(query: string | undefined, opts: { limit: string; author?: string }) {
@@ -136,29 +197,24 @@ program
     const { name, version: pinned } = parseNameVersion(spec);
     let version = pinned;
     if (!version) {
-      const detail = await fetchJson<SkillDetail>(`/skills/${encodeURIComponent(name)}`);
-      const active = detail.versions?.filter((v) => !v.is_yanked) ?? [];
-      const latest = active[0]?.version;
-      if (!latest) {
-        throw new Error(`No installable versions for skill "${name}".`);
-      }
-      version = latest;
+      version = await resolveLatestVersionFromList(name);
     }
     const meta = await fetchJson<VersionDetail>(
       `/skills/${encodeURIComponent(name)}/versions/${encodeURIComponent(version)}`,
     );
+    const expectedSha = parseRegistrySha256(meta.checksum);
     const outDir =
       opts.output ?? join(process.cwd(), ".skillget", "skills", meta.name, meta.version);
     const fileName = `${meta.name}-${meta.version}.tar.gz`;
     const dest = join(outDir, fileName);
     await mkdir(dirname(dest), { recursive: true });
 
-    const archiveRes = await fetch(meta.archive_url);
-    if (!archiveRes.ok) {
-      throw new Error(`Download failed ${archiveRes.status}: ${meta.archive_url}`);
+    const digest = await downloadArchiveWithSha256Verify(meta.archive_url, dest, expectedSha);
+    if (!expectedSha) {
+      console.warn(
+        "skillget: registry did not return a sha256 checksum; archive was not verified against the registry.",
+      );
     }
-    if (!archiveRes.body) throw new Error("Empty response body");
-    await pipeline(archiveRes.body, createWriteStream(dest));
 
     const cwd = process.cwd();
     const lock = readSkillsLock(cwd);
@@ -167,6 +223,7 @@ program
     console.log(`Wrote ${dest}`);
     console.log(`Updated ${join(cwd, LOCKFILE_NAME)}`);
     if (meta.checksum) console.log(`Checksum (registry): ${meta.checksum}`);
+    console.log(`SHA256 (file): ${digest}`);
     console.log("Extract the archive where you need it (tar -xzf …).");
   });
 
