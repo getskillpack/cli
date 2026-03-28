@@ -1,8 +1,44 @@
 # skillget CLI
 
-Command-line client for the [getskillpack](https://github.com/getskillpack) skill registry: **`list`**, **`search`**, **`install`**, **`publish`**, **`config`**.
+Official CLI for the [getskillpack](https://github.com/getskillpack) skill registry: **`list`**, **`search`**, **`install`**, **`publish`**, **`config`**.
 
-**If this project is useful to you:** starring [`getskillpack/cli`](https://github.com/getskillpack/cli), [`getskillpack/registry`](https://github.com/getskillpack/registry), and [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) on GitHub helps other teams discover the ecosystem — no spam, no bots, just signal. Growth framing and cadence: [docs/MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md).
+## At a glance
+
+**Who it’s for**
+
+- **Maintainers and skill authors** — versioned skills, trusted sources, optional self-hosted registry.
+- **Platform / DevOps** — one predictable flow for skill artifacts next to your existing supply chain.
+- **Teams already using npm, PyPI, or Packagist** — same *search → install → lockfile* muscle memory, applied to agent/IDE **skills**.
+
+**Positioning** — *Skill manager and registry that fit the developer workflow you already have*: open, predictable installs and a clear HTTP contract — not a replacement for language package managers.
+
+**Try it in one command** (Node 18+):
+
+```bash
+npm install -g @getskillpack/cli && skillget search
+```
+
+Build from Go source instead? See **Установка (канон)** below (`go build` + `skillget config`) or [Quick start](docs/QUICKSTART.md).
+
+**Docs (start here)**
+
+- **[Zero → first skill](docs/ZERO_TO_FIRST_SKILL.md)** — end-to-end tutorial, copy-paste, common failures.
+- **[Quick start](docs/QUICKSTART.md)** — env vars, `search` / `install` / `config`.
+- **Registry contract:** [registry-api.md](https://github.com/getskillpack/registry/blob/main/docs/registry-api.md) · **[Publish a skill](docs/PUBLISH_YOUR_SKILL.md)**.
+
+### vs familiar package registries (short)
+
+| | npm · PyPI · Packagist | skillget / getskillpack |
+|---|------------------------|-------------------------|
+| Unit of install | Language package | **Skill** tarball + manifest |
+| Discover + pin | registry + lockfile | **`skillget search` / `install` + `skills.lock`** |
+| On-disk tree | `node_modules` / site-packages / `vendor` | **`.skillget/skills/<name>/<version>/`** |
+
+Expanded matrix (scopes, auth, CI patterns) lives in a dedicated doc in this repo as that work lands; positioning context: [MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md). Hands-on discovery: [Example skill catalog](docs/EXAMPLE_SKILL_CATALOG.md).
+
+**If this is useful:** starring [`getskillpack/cli`](https://github.com/getskillpack/cli), [`getskillpack/registry`](https://github.com/getskillpack/registry), and [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) helps discovery — no bots or reciprocal schemes; see [docs/MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md).
+
+**Public landing (hero + funnel copy):** [getskillpack.github.io/landing/](https://getskillpack.github.io/landing/) · source mirror: [docs/landing/](docs/landing/).
 
 ## User docs (English)
 

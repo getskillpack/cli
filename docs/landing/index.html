@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>skillget — CLI for the getskillpack ecosystem</title>
-  <meta name="description" content="Install a vetted skill in one command, pin versions in your repo, and reproduce the same setup for your team and agents — without zip handoffs." />
+  <title>skillget — skill manager &amp; registry · getskillpack</title>
+  <meta name="description" content="Skill manager and registry that fit your existing workflow: search, install, lockfile for agent skills — like npm or PyPI, without replacing language package managers." />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="skillget — CLI for the getskillpack ecosystem" />
-  <meta property="og:description" content="Package manager for skills: search, install, lockfile. Official client for the getskillpack org." />
+  <meta property="og:title" content="skillget — skill manager &amp; registry · getskillpack" />
+  <meta property="og:description" content="Skill manager + registry: search, install, lockfile — predictable skill delivery without breaking your toolchain." />
   <meta property="og:url" content="https://getskillpack.github.io/landing/" />
   <meta property="og:site_name" content="getskillpack" />
   <meta property="og:image" content="https://getskillpack.github.io/landing/og-card.svg" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="skillget — CLI for the getskillpack ecosystem" />
-  <meta name="twitter:description" content="Package manager for skills: search, install, lockfile." />
+  <meta name="twitter:title" content="skillget — skill manager &amp; registry · getskillpack" />
+  <meta name="twitter:description" content="Skill manager + registry: search, install, lockfile — fits familiar package-manager workflows." />
   <meta name="twitter:image" content="https://getskillpack.github.io/landing/og-card.svg" />
 
   <link rel="canonical" href="https://getskillpack.github.io/landing/" />
@@ -216,9 +216,12 @@
   <header class="hero">
     <div class="wrap">
       <span class="badge">getskillpack · skillget</span>
-      <h1>A package manager for agent and IDE skills</h1>
+      <h1>Skill manager &amp; registry for agent and IDE skills</h1>
       <p class="lead">
-        Install a vetted skill in one command, pin versions in your repository, and reproduce the same setup for your team and agents — without zip bundles or ad-hoc runbooks.
+        Built to <strong>fit the developer workflow you already have</strong>: install a vetted skill in one command, pin versions in your repository, and reproduce the same setup for your team and agents — without zip bundles, ad-hoc runbooks, or replacing npm, pip, or Composer for your code.
+      </p>
+      <p class="note" style="margin:0 0 1.5rem;max-width:42rem;line-height:1.55">
+        Same muscle memory as <strong>npm · PyPI · Packagist</strong>: <em>search → install → lockfile</em> — applied to <strong>skills</strong> (manifest + tarball) with an open HTTP registry contract.
       </p>
       <p class="north" id="north-star">
         <strong>North star.</strong> We are building in the open so teams can trust, fork, and contribute.
@@ -270,8 +273,12 @@
   <section id="quick-start">
     <div class="wrap">
       <h2>Quick start</h2>
-      <p class="note" style="margin-top:0">Goal: build the Go client and install a first skill in about five minutes. Default registry base: <code>https://registry.skpkg.org/api/v1</code> (override when needed). For a full **step-by-step** path (npm or Go, verification, troubleshooting), see <a href="https://github.com/getskillpack/cli/blob/main/docs/ZERO_TO_FIRST_SKILL.md" target="_blank" rel="noopener">Zero to first skill</a> in the repo.</p>
-      <pre><span class="c"># Build the Go client (recommended path)</span>
+      <p class="note" style="margin-top:0">Default registry base: <code>https://registry.skpkg.org/api/v1</code> (override when needed). Full step-by-step (npm or Go, verification, troubleshooting): <a href="https://github.com/getskillpack/cli/blob/main/docs/ZERO_TO_FIRST_SKILL.md" target="_blank" rel="noopener">Zero to first skill</a>.</p>
+      <p class="note" style="margin-top:0.75rem"><strong>One command try</strong> (Node 18+):</p>
+      <pre><span class="c"># Fast path — global CLI, then hit the public registry</span>
+<span class="k">npm</span> install -g @getskillpack/cli && <span class="k">skillget</span> search</pre>
+      <p class="note" style="margin-top:1rem"><strong>From source (Go)</strong> — build in ~five minutes:</p>
+      <pre><span class="c"># Build the Go client</span>
 <span class="k">git</span> clone https://github.com/getskillpack/cli.git && <span class="k">cd</span> cli
 <span class="k">go</span> build -o skillget ./cmd/skillget
 
