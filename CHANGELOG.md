@@ -17,6 +17,7 @@ For **user-facing release notes** (RU/EN block per version) and **growth handoff
 
 ### Changed
 
+- CI: committed `vendor/` for private `skillget-manager`; default **Go** workflow job builds with `-mod=vendor` **without** repository secrets (fork PRs included). Optional job runs when `GETSKILLPACK_ORG_PAT` is set: remote `go mod download` / build and a check that `vendor/` matches `go.mod`.
 - Registry client: wrap transport (`fetch`) failures with a short connectivity/DNS hint; add HTTP hints for 400, 403, and 422 alongside existing status messages.
 
 ## [0.1.0] - 2026-03-28

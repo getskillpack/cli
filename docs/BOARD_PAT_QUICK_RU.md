@@ -9,6 +9,8 @@ GitHub → ваш репозиторий → **Settings** → **Secrets and vari
 
 Дальше запускаете workflow **getskillpack org (manual)** (или свой), который читает этот secret.
 
+Workflow **Go** в этом репозитории: job **`skillget (vendor)`** собирает с **`-mod=vendor`** и **не требует** секрета (в т.ч. на PR из форков). Job **`skillget (remote modules)`** запускается **только если** `GETSKILLPACK_ORG_PAT` задан, проверяет загрузку модулей с GitHub и что каталог **`vendor/`** совпадает с `go.mod`. См. §5.
+
 ## 2. Чтобы агент Paperclip (Cursor) видел токен при работе
 
 Нужно, чтобы переменная была в **окружении процесса, который запускает heartbeat** (сервер Paperclip / воркер / тот шелл, из которого вы стартуете `paperclipai` или связанный раннер).
@@ -61,3 +63,15 @@ GitHub → ваш репозиторий → **Settings** → **Secrets and vari
    Права на файл: `chmod 600 ~/.netrc`. Альтернатива — SSH remote и `insteadOf` (см. документацию GitHub).
 
 3. После публикации модуля в **публичный** proxy можно убрать `GOPRIVATE` для `skillget-manager` и пиноваться обычным `go get …@v0.1.0` без локального `replace`.
+
+## 5. Каталог `vendor/` (CI без секрета в репозитории)
+
+В репозитории закоммичен **`vendor/`** для `skillget-manager`, чтобы **GitHub Actions** могли выполнять `go build -mod=vendor` без доступа к приватным модулям по сети.
+
+После смены версии в `go.mod` / `go.sum` (или при добавлении зависимости):
+
+1. Локально: `GOPRIVATE`, `GONOSUMDB` и git-доступ к `github.com` (как в §4).
+2. `go mod tidy` при необходимости, затем **`go mod vendor`**.
+3. Закоммитить изменения **`go.mod`**, **`go.sum`** и **`vendor/`**.
+
+Без шага 2 job **`skillget (remote modules)`** (когда секрет уже есть) упадёт на проверке `git diff vendor/`.

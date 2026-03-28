@@ -10,8 +10,25 @@ permissions:
   contents: read
 
 jobs:
-  skillget:
+  # Default CI: no repository secrets required (fork PRs, or before board adds GETSKILLPACK_ORG_PAT).
+  # Commit vendor/ after dependency changes: `go mod vendor` (needs local GOPRIVATE + git auth — see docs/BOARD_PAT_QUICK_RU.md §4).
+  skillget-vendor:
+    name: skillget (vendor)
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+      - run: go build -mod=vendor -v ./...
+      - run: go vet -mod=vendor ./...
+      - run: bash scripts/check-version.sh
+
+  # When GETSKILLPACK_ORG_PAT is configured: verify the module graph without vendor and ensure vendor/ matches go.mod.
+  skillget-remote:
+    name: skillget (remote modules)
+    runs-on: ubuntu-latest
+    if: ${{ secrets.GETSKILLPACK_ORG_PAT != '' }}
     env:
       GOPRIVATE: github.com/getskillpack/*
       GONOSUMDB: github.com/getskillpack/*
@@ -21,10 +38,6 @@ jobs:
         env:
           TOKEN: ${{ secrets.GETSKILLPACK_ORG_PAT }}
         run: |
-          if [ -z "${TOKEN}" ]; then
-            echo "Secret GETSKILLPACK_ORG_PAT is required (private org modules). See docs/BOARD_PAT_QUICK_RU.md § 1." >&2
-            exit 1
-          fi
           git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "https://github.com/"
       - uses: actions/setup-go@v5
         with:
@@ -33,3 +46,10 @@ jobs:
       - run: go build -v ./...
       - run: go vet ./...
       - run: bash scripts/check-version.sh
+      - name: vendor in sync with go.mod
+        run: |
+          go mod vendor
+          git diff --exit-code vendor/ || (
+            echo "vendor/ is out of sync with go.mod; run go mod vendor locally (with org git auth) and commit." >&2
+            exit 1
+          )
