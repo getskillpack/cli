@@ -1,11 +1,37 @@
 #!/usr/bin/env node
 import { Command } from "commander";
-import { createWriteStream, readFileSync } from "node:fs";
+import { createWriteStream, readFileSync, writeFileSync } from "node:fs";
 import { mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { pipeline } from "node:stream/promises";
 import { fileURLToPath } from "node:url";
-import { fetchJson, registryBaseUrl } from "./registry.js";
+import { fetchJson, registryBaseUrl, registryConfigSource } from "./registry.js";
+
+const LOCKFILE_NAME = "skills.lock";
+
+type SkillsLockfile = {
+  lockfileVersion: 1;
+  skills: Record<string, string>;
+};
+
+function readSkillsLock(cwd: string): SkillsLockfile {
+  const p = join(cwd, LOCKFILE_NAME);
+  try {
+    const raw = readFileSync(p, "utf8");
+    const j = JSON.parse(raw) as Partial<SkillsLockfile>;
+    if (j?.lockfileVersion === 1 && j.skills && typeof j.skills === "object" && !Array.isArray(j.skills)) {
+      return { lockfileVersion: 1, skills: { ...j.skills } };
+    }
+  } catch {
+    /* missing or invalid */
+  }
+  return { lockfileVersion: 1, skills: {} };
+}
+
+function writeSkillsLock(cwd: string, lock: SkillsLockfile): void {
+  const p = join(cwd, LOCKFILE_NAME);
+  writeFileSync(p, `${JSON.stringify(lock, null, 2)}\n`, "utf8");
+}
 
 const pkgPath = join(dirname(fileURLToPath(import.meta.url)), "..", "package.json");
 const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as {
@@ -32,6 +58,10 @@ type VersionDetail = {
 
 type SkillDetail = {
   name: string;
+  repository_url?: string | null;
+  homepage?: string | null;
+  dependencies?: Array<{ name: string; range?: string }>;
+  latest_version?: string | null;
   versions?: Array<{ version: string; is_yanked?: boolean }>;
 };
 
@@ -44,7 +74,7 @@ function parseNameVersion(spec: string): { name: string; version?: string } {
 const program = new Command();
 
 program
-  .name("skpkg")
+  .name("skillget")
   .description(pkg.description)
   .version(pkg.version, "-V, --version", "print version");
 
@@ -77,7 +107,7 @@ program
   .argument("<spec>", "skill name or name@version")
   .option(
     "-o, --output <path>",
-    "directory to extract tarball (default: ./.skpkg/skills/<name>)",
+    "directory to extract tarball (default: ./.skillget/skills/<name>/<version>)",
   )
   .description("download a skill archive from the registry")
   .action(async (spec: string, opts: { output?: string }) => {
@@ -96,7 +126,7 @@ program
       `/skills/${encodeURIComponent(name)}/versions/${encodeURIComponent(version)}`,
     );
     const outDir =
-      opts.output ?? join(process.cwd(), ".skpkg", "skills", meta.name, meta.version);
+      opts.output ?? join(process.cwd(), ".skillget", "skills", meta.name, meta.version);
     const fileName = `${meta.name}-${meta.version}.tar.gz`;
     const dest = join(outDir, fileName);
     await mkdir(dirname(dest), { recursive: true });
@@ -108,7 +138,12 @@ program
     if (!archiveRes.body) throw new Error("Empty response body");
     await pipeline(archiveRes.body, createWriteStream(dest));
 
+    const cwd = process.cwd();
+    const lock = readSkillsLock(cwd);
+    lock.skills[meta.name] = meta.version;
+    writeSkillsLock(cwd, lock);
     console.log(`Wrote ${dest}`);
+    console.log(`Updated ${join(cwd, LOCKFILE_NAME)}`);
     if (meta.checksum) console.log(`Checksum (registry): ${meta.checksum}`);
     console.log("Extract the archive where you need it (tar -xzf …).");
   });
@@ -117,7 +152,13 @@ program
   .command("config")
   .description("show effective registry configuration")
   .action(() => {
-    console.log(`SKPKG_REGISTRY_URL=${registryBaseUrl()}`);
+    const url = registryBaseUrl();
+    const src = registryConfigSource();
+    console.log(`registry URL: ${url}`);
+    console.log(`source: ${src}`);
+    if (src === "default") {
+      console.log("override: export SKILLGET_REGISTRY_URL=… (or legacy SKPKG_REGISTRY_URL)");
+    }
   });
 
 await program.parseAsync(process.argv);

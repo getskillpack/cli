@@ -1,10 +1,10 @@
 {
   "name": "@getskillpack/cli",
   "version": "0.1.0",
-  "description": "Command-line client for the skpkg skill registry",
+  "description": "Command-line client for the getskillpack skill registry (skillget)",
   "type": "module",
   "bin": {
-    "skpkg": "./dist/cli.js"
+    "skillget": "./dist/cli.js"
   },
   "files": [
     "dist"
@@ -16,7 +16,8 @@
     "node": ">=18"
   },
   "keywords": [
-    "skpkg",
+    "skillget",
+    "getskillpack",
     "skills",
     "cli",
     "openclaw"
