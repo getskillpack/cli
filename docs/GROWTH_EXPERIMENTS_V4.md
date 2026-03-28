@@ -64,7 +64,7 @@ Recorded at the start of v4 (same method as v3: GitHub UI or API when repos are 
 Not always run as an A/B; use when a release has a strong security or reliability story.
 
 - **Template A (default):** [RELEASE.md](RELEASE.md#github-release-narrative-template) — “What shipped / Why it matters / What’s next”.
-- **Template B:** [RELEASE.md](RELEASE.md#github-release-narrative-template-b-problem--fix--upgrade) — shorter “Problem → fix → upgrade” arc.
+- **Template B:** [RELEASE.md](RELEASE.md) — subsection **“Template B (‘Problem → fix → upgrade’)”** — shorter problem/fix/upgrade arc.
 
 Pick one per release; log which template was used in the GitHub Release discussion or internal ticket.
 
