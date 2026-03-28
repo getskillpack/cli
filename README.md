@@ -2,6 +2,12 @@
 
 Command-line client for the [getskillpack](https://github.com/getskillpack) skill registry: **`list`**, **`search`**, **`install`**, **`publish`**, **`config`**.
 
+## User docs (English)
+
+- **[Quick start](docs/QUICKSTART.md)** — build, env vars, `search` / `install` / `config`.
+- **[Release process](docs/RELEASE.md)** — semver, tags, changelog, alignment with registry API.
+- **[Changelog](CHANGELOG.md)** — version history ([Keep a Changelog](https://keepachangelog.com/en/1.1.0/)).
+
 ## Лендинг
 
 - **Статическая страница (hero, как работает, quick start, доверие, футер):** [docs/landing/index.html](docs/landing/index.html) — откройте файл в браузере или задеплойте через GitHub Pages (workflow [.github/workflows/deploy-landing.yml](.github/workflows/deploy-landing.yml); канонический URL: `https://getskillpack.github.io/cli/`).
