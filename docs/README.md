@@ -10,7 +10,7 @@ These are the primary paths for CLI users and skill authors:
 | [QUICKSTART.md](QUICKSTART.md) | Build, env, daily commands |
 | [EXAMPLE_SKILL_CATALOG.md](EXAMPLE_SKILL_CATALOG.md) | Example packs |
 | [PUBLISH_YOUR_SKILL.md](PUBLISH_YOUR_SKILL.md) | Publishing skills |
-| [RELEASE.md](RELEASE.md) | Releases and versioning |
+| [RELEASE.md](RELEASE.md) | Releases, versioning, public launch readiness |
 
 ## Operations, growth, and automation
 
