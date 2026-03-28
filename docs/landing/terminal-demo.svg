@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320">
+  <rect width="720" height="320" rx="12" fill="#08090c" stroke="#252838" stroke-width="1"/>
+  <rect x="0" y="0" width="720" height="36" rx="12" fill="#14161f"/>
+  <rect x="0" y="24" width="720" height="12" fill="#14161f"/>
+  <circle cx="22" cy="18" r="6" fill="#ff5f57"/>
+  <circle cx="44" cy="18" r="6" fill="#febc2e"/>
+  <circle cx="66" cy="18" r="6" fill="#28c840"/>
+  <text x="360" y="22" fill="#8b90a5" font-family="ui-monospace, Consolas, monospace" font-size="12" text-anchor="middle">skillget</text>
+  <text x="24" y="72" fill="#6b7280" font-family="ui-monospace, Consolas, monospace" font-size="13">$ export SKILLGET_REGISTRY_URL=http://localhost:3000/api/v1</text>
+  <text x="24" y="102" fill="#e8e9ef" font-family="ui-monospace, Consolas, monospace" font-size="13"><tspan fill="#5eead4">$</tspan> ./skillget search</text>
+  <text x="24" y="132" fill="#8b90a5" font-family="ui-monospace, Consolas, monospace" font-size="13">alpha-test-skill  0.1.0</text>
+  <text x="24" y="178" fill="#e8e9ef" font-family="ui-monospace, Consolas, monospace" font-size="13"><tspan fill="#5eead4">$</tspan> ./skillget install alpha-test-skill</text>
+  <text x="24" y="208" fill="#8b90a5" font-family="ui-monospace, Consolas, monospace" font-size="13">Installed alpha-test-skill @ 0.1.0 ’ .skillget/skills/</text>
+  <text x="24" y="254" fill="#6b7280" font-family="ui-monospace, Consolas, monospace" font-size="12">skills.lock updated</text>
+</svg>

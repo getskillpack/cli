@@ -2,6 +2,17 @@
 
 Command-line client for the [getskillpack](https://github.com/getskillpack) skill registry (`search`, `install`, `config`).
 
+## Лендинг
+
+- **Статическая страница (hero, как работает, quick start, доверие, футер):** [docs/landing/index.html](docs/landing/index.html) — откройте файл в браузере или задеплойте через GitHub Pages (workflow [.github/workflows/deploy-landing.yml](.github/workflows/deploy-landing.yml); канонический URL: `https://getskillpack.github.io/cli/`).
+- **Тексты и чеклист:** [docs/MARKETING_LANDING_AND_GROWTH_RU.md](docs/MARKETING_LANDING_AND_GROWTH_RU.md).
+
+## Демо установки (визуально)
+
+Пример сессии в терминале (как «скриншот» для README):
+
+![skillget: search и install](docs/landing/terminal-demo.svg)
+
 ## Репозитории продукта (org)
 
 | Репозиторий | Назначение |
@@ -63,7 +74,7 @@ git push -u origin main
 
 ## Related
 
-- Registry API: [registry/API.md](https://github.com/getskillpack/registry/blob/main/API.md) (локально: `../skpkg-registry/API.md`; хост `registry.skpkg.org` — placeholder до отдельной задачи).
+- **Стабильный URL документации API registry:** [github.com/getskillpack/registry/blob/main/API.md](https://github.com/getskillpack/registry/blob/main/API.md) (источник правды в репозитории; публичный хост `registry.skpkg.org` — по мере готовности инфраструктуры).
 - GitHub org **getskillpack** (onboarding [XDE-3](/XDE/issues/XDE-3)).
 - PAT / CI / scope: [docs/GETSKILLPACK_GITHUB_ORG.md](docs/GETSKILLPACK_GITHUB_ORG.md) ([XDE-10](/XDE/issues/XDE-10)).
 - Установка skill в Paperclip (board): [docs/PAPERCLIP_SKILL_INSTALL_RU.md](docs/PAPERCLIP_SKILL_INSTALL_RU.md).

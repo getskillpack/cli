@@ -1,0 +1,33 @@
+# Публикует статический лендинг из docs/landing на GitHub Pages (Project site).
+# В настройках репозитория: Settings → Pages → Source: GitHub Actions.
+name: Deploy landing (GitHub Pages)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/landing/**"
+      - ".github/workflows/deploy-landing.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-cli-landing
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/landing
+      - id: deployment
+        uses: actions/deploy-pages@v4

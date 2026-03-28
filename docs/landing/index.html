@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>skillget — CLI для экосистемы getskillpack</title>
+  <meta name="description" content="Установите проверенный skill одной командой, зафиксируйте версию в репозитории и воспроизводите окружение для команды и агентов." />
+
+  <!-- Open Graph / соцсети (абсолютные URL — при деплое на GitHub Pages) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="skillget — CLI для экосистемы getskillpack" />
+  <meta property="og:description" content="Пакетный менеджер для skills: search, install, lockfile. Официальный клиент org getskillpack." />
+  <meta property="og:url" content="https://getskillpack.github.io/cli/" />
+  <meta property="og:site_name" content="getskillpack" />
+  <meta property="og:image" content="https://getskillpack.github.io/cli/og-card.svg" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="skillget — CLI для экосистемы getskillpack" />
+  <meta name="twitter:description" content="Пакетный менеджер для skills: search, install, lockfile." />
+  <meta name="twitter:image" content="https://getskillpack.github.io/cli/og-card.svg" />
+
+  <link rel="canonical" href="https://getskillpack.github.io/cli/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>" />
+
+  <style>
+    :root {
+      --bg: #0c0d12;
+      --surface: #14161f;
+      --border: #252838;
+      --text: #e8e9ef;
+      --muted: #8b90a5;
+      --accent: #5eead4;
+      --accent-dim: #2dd4bf33;
+      --warn: #fbbf24;
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+      --mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+      --radius: 12px;
+      --max: 920px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+    header.hero {
+      padding: 4rem 0 3rem;
+      background: radial-gradient(ellipse 80% 60% at 50% -20%, var(--accent-dim), transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: clamp(1.85rem, 4vw, 2.65rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0 0 1rem;
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 38rem;
+      margin: 0 0 1.75rem;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.12s ease;
+    }
+    .btn:hover { transform: translateY(-1px); text-decoration: none; }
+    .btn-primary {
+      background: var(--accent);
+      color: #042f2e;
+    }
+    .btn-primary:hover { background: #7ff5e4; color: #042f2e; }
+    .btn-ghost {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    section { padding: 3.25rem 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+    h2 {
+      font-size: 1.45rem;
+      margin: 0 0 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .flow {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      margin-top: 1.5rem;
+    }
+    .flow-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      text-align: center;
+    }
+    .flow-card strong { display: block; font-size: 0.95rem; margin-bottom: 0.35rem; }
+    .flow-card span { font-size: 0.8rem; color: var(--muted); }
+    .arrow {
+      display: none;
+    }
+    @media (min-width: 720px) {
+      .flow { grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; }
+      .arrow { display: block; color: var(--muted); font-size: 1.25rem; }
+    }
+    pre, code { font-family: var(--mono); font-size: 0.85rem; }
+    pre {
+      background: #08090c;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      overflow-x: auto;
+      margin: 0;
+      line-height: 1.5;
+    }
+    pre .c { color: #6b7280; }
+    pre .k { color: var(--accent); }
+    .grid-2 {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.35rem;
+    }
+    .card h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+    .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    footer {
+      padding: 2.5rem 0 3rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer .links { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-bottom: 1rem; }
+    .note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <span class="badge">getskillpack · skillget</span>
+      <h1>Пакетный менеджер для skills агентов и IDE</h1>
+      <p class="lead">
+        Установите проверенный skill одной командой, зафиксируйте версию в репозитории и воспроизводите окружение для команды и агентов — без копирования zip и ручных инструкций.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#quick-start">Установить CLI</a>
+        <a class="btn btn-ghost" href="https://github.com/getskillpack/registry/blob/main/API.md" target="_blank" rel="noopener">Документация API registry</a>
+        <a class="btn btn-ghost" href="https://github.com/getskillpack/cli" target="_blank" rel="noopener">Исходники на GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="how">
+    <div class="wrap">
+      <h2>Как это работает</h2>
+      <p class="note" style="margin-top:0">Цепочка от реестра до каталога в вашем репозитории.</p>
+      <div class="flow" aria-label="Схема: registry, CLI, lockfile, каталог">
+        <div class="flow-card">
+          <strong>Registry</strong>
+          <span>HTTP API и метаданные skills</span>
+        </div>
+        <span class="arrow" aria-hidden="true">→</span>
+        <div class="flow-card">
+          <strong>skillget (CLI)</strong>
+          <span>search, install, config</span>
+        </div>
+        <span class="arrow" aria-hidden="true">→</span>
+        <div class="flow-card">
+          <strong>skills.lock</strong>
+          <span>закреплённые версии</span>
+        </div>
+        <span class="arrow" aria-hidden="true">→</span>
+        <div class="flow-card">
+          <strong>.skillget/</strong>
+          <span>локальный каталог установки</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quick-start">
+    <div class="wrap">
+      <h2>Быстрый старт</h2>
+      <p class="note" style="margin-top:0">Цель: за ~5 минут собрать бинарь и поставить первый skill. Реестр по умолчанию: <code>https://registry.skpkg.org/api/v1</code> (можно переопределить).</p>
+      <pre><span class="c"># Сборка Go-клиента (рекомендуемый путь)</span>
+<span class="k">git</span> clone https://github.com/getskillpack/cli.git && <span class="k">cd</span> cli
+<span class="k">go</span> build -o skillget ./cmd/skillget
+
+<span class="c"># Локальный или кастомный registry</span>
+<span class="k">export</span> SKILLGET_REGISTRY_URL=http://localhost:3000/api/v1
+
+<span class="k">./skillget</span> search
+<span class="k">./skillget</span> install &lt;имя-skill&gt;</pre>
+      <p class="note">После <code>install</code> CLI обновляет <code>skills.lock</code> и кладёт артефакты в <code>.skillget/skills/&lt;name&gt;/&lt;version&gt;/</code>.</p>
+    </div>
+  </section>
+
+  <section id="trust">
+    <div class="wrap">
+      <h2>Доверие и прозрачность</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Лицензия и код</h3>
+          <p>CLI и сопутствующие пакеты в org публикуются с открытым исходным кодом (см. LICENSE в каждом репозитории). Мы не обещаем публичный SLA до релиза — сроки и приоритеты отражаем в Issues.</p>
+        </div>
+        <div class="card">
+          <h3>Дорожная карта</h3>
+          <p>Следите за задачами и релизами в <a href="https://github.com/getskillpack" target="_blank" rel="noopener">организации getskillpack</a> на GitHub: регулярные теги на <code>cli</code>, <code>registry</code> и <code>skillget-manager</code> — ориентир для ранних адоптеров.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="authors">
+    <div class="wrap">
+      <h2>Для авторов skills</h2>
+      <p>Контракт публикации и формат метаданных описаны в репозитории registry. Начните с <a href="https://github.com/getskillpack/registry/blob/main/API.md" target="_blank" rel="noopener">API.md</a> и исходников <a href="https://github.com/getskillpack/registry" target="_blank" rel="noopener">getskillpack/registry</a>.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="links">
+        <a href="https://github.com/getskillpack">GitHub org</a>
+        <a href="https://github.com/getskillpack/cli">Репозиторий cli</a>
+        <a href="https://github.com/getskillpack/registry/blob/main/API.md">Registry API</a>
+      </div>
+      <p>Канонические формулировки и KPI роста — в <a href="https://github.com/getskillpack/cli/blob/main/docs/MARKETING_LANDING_AND_GROWTH_RU.md">MARKETING_LANDING_AND_GROWTH_RU.md</a>. Статус публичного хоста документации и аналитики согласуется с board.</p>
+    </div>
+  </footer>
+</body>
+</html>
