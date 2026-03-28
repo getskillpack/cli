@@ -45,6 +45,8 @@ export SKILLGET_REGISTRY_URL=http://localhost:3000/api/v1
 
 ## Common commands
 
+Subcommand flags: `skillget search -h`, `skillget install -h`, `skillget publish -h` (or `--help`).
+
 Print effective registry URL and how it was resolved:
 
 ```bash

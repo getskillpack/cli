@@ -4,6 +4,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -25,27 +26,31 @@ func main() {
 		usage()
 	case "-V", "--version":
 		fmt.Println(version)
-	case "list", "search":
-		if err := runSearch(os.Args[2:]); err != nil {
-			fmt.Fprintf(os.Stderr, "skillget: %v\n", err)
-			os.Exit(1)
-		}
+	case "list":
+		handleRunErr(runSearch("list", os.Args[2:]))
+	case "search":
+		handleRunErr(runSearch("search", os.Args[2:]))
 	case "install":
-		if err := runInstall(os.Args[2:]); err != nil {
-			fmt.Fprintf(os.Stderr, "skillget: %v\n", err)
-			os.Exit(1)
-		}
+		handleRunErr(runInstall(os.Args[2:]))
 	case "publish":
-		if err := runPublish(os.Args[2:]); err != nil {
-			fmt.Fprintf(os.Stderr, "skillget: %v\n", err)
-			os.Exit(1)
-		}
+		handleRunErr(runPublish(os.Args[2:]))
 	case "config":
 		runConfig()
 	default:
 		usage()
 		os.Exit(2)
 	}
+}
+
+func handleRunErr(err error) {
+	if err == nil {
+		return
+	}
+	if errors.Is(err, flag.ErrHelp) {
+		os.Exit(0)
+	}
+	fmt.Fprintf(os.Stderr, "skillget: %v\n", err)
+	os.Exit(1)
 }
 
 func usage() {
@@ -59,6 +64,8 @@ Usage:
   skillget config
   skillget -V
 
+Subcommand flags: skillget <command> -h
+
 Environment:
   SKILLGET_REGISTRY_URL   registry API base (optional)
   SKPKG_REGISTRY_URL      legacy fallback for registry URL
@@ -68,8 +75,8 @@ Environment:
 `)
 }
 
-func runSearch(args []string) error {
-	fs := flag.NewFlagSet("search", flag.ContinueOnError)
+func runSearch(cmd string, args []string) error {
+	fs := flag.NewFlagSet(cmd, flag.ContinueOnError)
 	fs.SetOutput(os.Stderr)
 	limit := fs.Int("limit", 20, "max rows")
 	author := fs.String("author", "", "filter by author")
