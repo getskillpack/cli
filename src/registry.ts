@@ -31,14 +31,20 @@ export function registryToken(): string {
 
 function hintForStatus(status: number): string {
   switch (status) {
+    case 400:
+      return "\nHint: request may be invalid — check query params and paths against the registry API.";
     case 401:
       return "\nHint: set SKILLGET_REGISTRY_TOKEN (or SKILLGET_TOKEN) for authenticated requests.";
+    case 403:
+      return "\nHint: token may lack permission, or the registry blocks this operation for anonymous clients.";
     case 404:
       return "\nHint: check the skill name and SKILLGET_REGISTRY_URL.";
-    case 410:
-      return "\nHint: this version was yanked and cannot be installed.";
     case 409:
       return "\nHint: this skill version already exists; bump version or yank the old release.";
+    case 410:
+      return "\nHint: this version was yanked and cannot be installed.";
+    case 422:
+      return "\nHint: manifest or form fields failed validation — compare with the registry API schema.";
     case 503:
       return "\nHint: registry write API may be disabled on the server (REGISTRY_WRITE_TOKEN).";
     default:
@@ -46,15 +52,29 @@ function hintForStatus(status: number): string {
   }
 }
 
+function networkHint(): string {
+  return "\nHint: check network connectivity, DNS, and SKILLGET_REGISTRY_URL (host must resolve; path usually ends with /api/v1).";
+}
+
+function wrapFetchError(err: unknown): Error {
+  const msg = err instanceof Error ? err.message : String(err);
+  return new Error(`Registry request failed: ${msg}${networkHint()}`);
+}
+
 export async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
   const url = `${registryBaseUrl()}${path.startsWith("/") ? path : `/${path}`}`;
-  const res = await fetch(url, {
-    ...init,
-    headers: {
-      Accept: "application/json",
-      ...init?.headers,
-    },
-  });
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      ...init,
+      headers: {
+        Accept: "application/json",
+        ...init?.headers,
+      },
+    });
+  } catch (e) {
+    throw wrapFetchError(e);
+  }
   if (!res.ok) {
     const text = await res.text().catch(() => "");
     throw new Error(`Registry ${res.status} ${res.statusText}: ${text || url}${hintForStatus(res.status)}`);
@@ -72,14 +92,19 @@ export async function publishSkill(manifestJson: string, archive: Buffer): Promi
   const form = new FormData();
   form.set("manifest", manifestJson);
   form.set("archive", new Blob([archive as BlobPart], { type: "application/gzip" }), "skill.tar.gz");
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/json",
-    },
-    body: form,
-  });
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+      body: form,
+    });
+  } catch (e) {
+    throw wrapFetchError(e);
+  }
   if (res.status === 201) {
     return;
   }

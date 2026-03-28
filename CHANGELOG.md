@@ -9,7 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Integration test opt-out: set `SKIP_SKILLGET_REGISTRY_INTEGRATION=1` to skip the public-registry smoke test (offline sandboxes only; keep enabled in CI that must assert `registry.skpkg.org`).
 - English onboarding tutorial [docs/ZERO_TO_FIRST_SKILL.md](docs/ZERO_TO_FIRST_SKILL.md): install → first skill → verify, with troubleshooting; linked from README, Quick start, example catalog, and the static landing page.
+
+### Changed
+
+- Registry client: wrap transport (`fetch`) failures with a short connectivity/DNS hint; add HTTP hints for 400, 403, and 422 alongside existing status messages.
 
 ## [0.1.0] - 2026-03-28
 

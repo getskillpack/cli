@@ -1,6 +1,7 @@
 /**
  * Integration: public registry — GET /skills → GET /skills/:name/versions/:version → download + sha256.
  * Run: npm run test:integration (builds dist first).
+ * Offline sandboxes: SKIP_SKILLGET_REGISTRY_INTEGRATION=1 skips the test (do not use in CI that should assert public registry).
  */
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
@@ -18,6 +19,12 @@ const base =
 const skill = process.env.SKILLGET_INTEGRATION_SKILL || "para-memory-files";
 
 async function main() {
+  if (process.env.SKIP_SKILLGET_REGISTRY_INTEGRATION === "1") {
+    console.log(
+      "SKIP_SKILLGET_REGISTRY_INTEGRATION=1 — skipping public registry integration test.",
+    );
+    return;
+  }
   const listUrl = `${base}/skills?q=${encodeURIComponent(skill)}&limit=20&offset=0`;
   const listRes = await fetch(listUrl, { headers: { Accept: "application/json" } });
   if (!listRes.ok) {
