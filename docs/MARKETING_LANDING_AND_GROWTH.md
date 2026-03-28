@@ -20,6 +20,8 @@ Install a vetted skill in one command, pin versions in your repository, and repr
 
 Goals: **30 seconds** to understand the product, **~5 minutes** to build or install the CLI and pull a first skill.
 
+**Canonical public URL (GitHub Pages):** https://getskillpack.github.io/landing/ — served from the public repo [`getskillpack/landing`](https://github.com/getskillpack/landing) (mirrors `cli`’s `docs/landing/`).
+
 1. **Hero:** product + CTAs (“Install CLI”, “Registry API docs”, “Source on GitHub”).
 2. **North star (short):** we grow **trust and adoption in the open**; **~10k cumulative GitHub stars** across key public repos is a **long-horizon compass**, not a quarterly quota.
 3. **How it works:** registry → CLI → `skills.lock` → `.skillget/` install tree.
