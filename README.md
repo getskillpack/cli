@@ -13,6 +13,8 @@ Command-line client for the [getskillpack](https://github.com/getskillpack) skil
 
 ![skillget: search и install](docs/landing/terminal-demo.svg)
 
+Интерактивно в терминале: `asciinema play docs/asciinema/skillget-quickstart.cast` (подробности в разделе **Нативный бинарник (Go 1.22+)** ниже).
+
 ## Репозитории продукта (org)
 
 | Репозиторий | Назначение |
@@ -56,6 +58,30 @@ go build -o skillget ./cmd/skillget
 ./skillget --help
 ./skillget config
 ```
+
+#### Быстрый старт (первый запуск за пару минут)
+
+```bash
+git clone https://github.com/getskillpack/cli.git && cd cli
+go build -o skillget ./cmd/skillget
+./skillget config
+# Публичный реестр по умолчанию: https://registry.skpkg.org/api/v1
+export SKILLGET_REGISTRY_URL=http://localhost:8080/api/v1   # локальный registry
+./skillget list
+./skillget install <имя-скилла>
+```
+
+После `install` появятся **`skills.lock`** и **`.skillget/skills/<name>/<version>/`**.
+
+#### Демо в терминале (asciinema)
+
+Локально (нужен [asciinema](https://asciinema.org/docs/installation)):
+
+```bash
+asciinema play docs/asciinema/skillget-quickstart.cast
+```
+
+Исходник записи: [`docs/asciinema/skillget-quickstart.cast`](docs/asciinema/skillget-quickstart.cast). После выкладки ролика на asciinema.org board может добавить бейдж вида `[![asciicast](https://asciinema.org/a/<id>.svg)](https://asciinema.org/a/<id>)` в этот раздел.
 
 ## Команды
 
@@ -124,7 +150,7 @@ git push -u origin main
 
 ## Related
 
-- **Стабильный URL документации API registry:** [github.com/getskillpack/registry/blob/main/API.md](https://github.com/getskillpack/registry/blob/main/API.md) (источник правды в репозитории; публичный хост `registry.skpkg.org` — по мере готовности инфраструктуры).
+- **Registry API (канон):** [docs/registry-api.md](https://github.com/getskillpack/registry/blob/main/docs/registry-api.md); на развёрнутом реестре: `GET /docs/registry-api` (Markdown). Корневой [API.md](https://github.com/getskillpack/registry/blob/main/API.md) — короткий указатель для старых ссылок.
 - GitHub org **getskillpack** (onboarding [XDE-3](/XDE/issues/XDE-3)).
 - PAT / CI / scope: [docs/GETSKILLPACK_GITHUB_ORG.md](docs/GETSKILLPACK_GITHUB_ORG.md) ([XDE-10](/XDE/issues/XDE-10)).
 - Установка skill в Paperclip (board): [docs/PAPERCLIP_SKILL_INSTALL_RU.md](docs/PAPERCLIP_SKILL_INSTALL_RU.md).

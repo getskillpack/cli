@@ -1,0 +1,10 @@
+{"version": 2, "width": 100, "height": 22, "timestamp": 1711612800, "env": {"SHELL": "/bin/bash", "TERM": "xterm-256color"}}
+[0.0, "o", "\u001b[1;32m$\u001b[0m go build -o skillget ./cmd/skillget\r\n"]
+[0.4, "o", "\u001b[1;32m$\u001b[0m ./skillget config\r\n"]
+[0.8, "o", "registry: https://registry.skpkg.org/api/v1\r\n"]
+[1.2, "o", "\u001b[1;32m$\u001b[0m export SKILLGET_REGISTRY_URL=http://localhost:8080/api/v1\r\n"]
+[1.6, "o", "\u001b[1;32m$\u001b[0m ./skillget list hello\r\n"]
+[2.0, "o", "NAME                 VERSION  AUTHOR\r\n"]
+[2.1, "o", "hello-skill          0.1.0    demo\r\n"]
+[2.5, "o", "\u001b[1;32m$\u001b[0m ./skillget install hello-skill\r\n"]
+[3.0, "o", "installed hello-skill@0.1.0 -> .skillget/skills/hello-skill/0.1.0\r\n"]
