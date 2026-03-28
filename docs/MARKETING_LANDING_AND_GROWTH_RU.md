@@ -60,6 +60,5 @@
 
 ## Связанные тикеты и доки
 
-- [XDE-30](/XDE/issues/XDE-30) — исходная постановка CMO.
-- [XDE-26](/XDE/issues/XDE-26) — ведение проектов / упаковка.
+- **XDE-30**, **XDE-26** — тикеты в Paperclip (префикс компании XDE); на GitHub не резолвятся.
 - [AGENT_GITHUB_REPO_WORKFLOW_RU.md](AGENT_GITHUB_REPO_WORKFLOW_RU.md) — push и гигиена PAT.
