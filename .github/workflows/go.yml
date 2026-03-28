@@ -22,6 +22,7 @@ jobs:
           go-version: "1.22"
       - run: go build -mod=vendor -v ./...
       - run: go vet -mod=vendor ./...
+      - run: go test -mod=vendor -count=1 ./...
       - run: bash scripts/check-version.sh
 
   # When GETSKILLPACK_ORG_PAT is configured: verify the module graph without vendor and ensure vendor/ matches go.mod.
@@ -68,6 +69,9 @@ jobs:
       - name: go vet
         if: steps.gate.outputs.skip == 'false'
         run: go vet ./...
+      - name: go test
+        if: steps.gate.outputs.skip == 'false'
+        run: go test -count=1 ./...
       - name: check-version
         if: steps.gate.outputs.skip == 'false'
         run: bash scripts/check-version.sh

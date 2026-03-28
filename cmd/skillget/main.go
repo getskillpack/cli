@@ -35,7 +35,7 @@ func main() {
 	case "publish":
 		handleRunErr(runPublish(os.Args[2:]))
 	case "config":
-		runConfig()
+		handleRunErr(runConfig(os.Args[2:]))
 	default:
 		usage()
 		os.Exit(2)
@@ -203,7 +203,15 @@ func runPublish(args []string) error {
 	return nil
 }
 
-func runConfig() {
+func runConfig(args []string) error {
+	fs := flag.NewFlagSet("config", flag.ContinueOnError)
+	fs.SetOutput(os.Stderr)
+	if err := fs.Parse(args); err != nil {
+		return err
+	}
+	if fs.NArg() > 0 {
+		return fmt.Errorf("config does not take arguments (got %q)", strings.Join(fs.Args(), " "))
+	}
 	url := skillgetmanager.RegistryBaseURL()
 	src := skillgetmanager.RegistryConfigSource()
 	fmt.Printf("registry URL: %s\n", url)
@@ -217,4 +225,5 @@ func runConfig() {
 	} else {
 		fmt.Println("write token: not set — required for skillget publish")
 	}
+	return nil
 }
