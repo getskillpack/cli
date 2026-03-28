@@ -1,6 +1,6 @@
 # skillget CLI
 
-Command-line client for the [getskillpack](https://github.com/getskillpack) skill registry (`search`, `install`, `config`).
+Command-line client for the [getskillpack](https://github.com/getskillpack) skill registry: **`list`**, **`search`**, **`install`**, **`publish`**, **`config`**.
 
 ## Лендинг
 
@@ -18,12 +18,38 @@ Command-line client for the [getskillpack](https://github.com/getskillpack) skil
 | Репозиторий | Назначение |
 |-------------|------------|
 | [registry](https://github.com/getskillpack/registry) | Контракт API и код реестра |
-| [skillget-manager](https://github.com/getskillpack/skillget-manager) | Ядро менеджера (lockfile, клиент, установка) |
-| [cli](https://github.com/getskillpack/cli) | Бинарь `skillget` (обёртка над менеджером) |
+| [skillget-manager](https://github.com/getskillpack/skillget-manager) | Lockfile, HTTP-клиент, установка, **publish** |
+| [cli](https://github.com/getskillpack/cli) | Бинарь `skillget` (Go) и опционально npm-пакет |
 
-## Нативный бинарник (целевой артефакт, Go 1.22+)
+## Установка (канон)
 
-Исходники: `cmd/skillget`. Зависимость: [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager).
+### npm (Node 18+)
+
+Пакет **`@getskillpack/cli`**, бинарь на PATH: **`skillget`**.
+
+```bash
+npm install -g @getskillpack/cli
+skillget --help
+```
+
+### Homebrew (из исходников)
+
+Формула-шаблон: [`packaging/homebrew/skillget.rb`](packaging/homebrew/skillget.rb). После публикации tap org **getskillpack**:
+
+```bash
+brew tap getskillpack/tap
+brew install skillget
+```
+
+Локально из клона:
+
+```bash
+brew install --build-from-source ./packaging/homebrew/skillget.rb
+```
+
+### Нативный бинарник (Go 1.22+)
+
+Исходники: `cmd/skillget`. Зависимость: [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) (в этом workspace при необходимости используется `replace` в `go.mod` — см. комментарий в файле).
 
 ```bash
 go build -o skillget ./cmd/skillget
@@ -31,13 +57,47 @@ go build -o skillget ./cmd/skillget
 ./skillget config
 ```
 
-## npm-пакет (исторический прототип)
+## Команды
 
-- **npm name:** `@getskillpack/cli`
-- **binary:** `skillget` (Node)
-- **Node:** 18+
+| Команда | Назначение |
+|---------|------------|
+| `skillget list [query]` | Список / поиск в реестре (`GET /skills`, опционально `-author`) |
+| `skillget search [query]` | То же, что `list` |
+| `skillget install <name\|name@version>` | Скачать архив, обновить `skills.lock` |
+| `skillget publish … <archive.tar.gz>` | Залить версию (`POST /skills`, нужен токен) |
+| `skillget config` | Показать базовый URL реестра и наличие write-токена |
 
-Целевой поставляемый клиент для экосистемы getskillpack — **скомпилированный `skillget` на Go**; npm-обёртка остаётся опциональной и требует отдельного согласования board.
+### Примеры
+
+```bash
+export SKILLGET_REGISTRY_URL=http://localhost:3000/api/v1
+skillget list
+skillget search para --limit 10
+skillget install alpha-test-skill
+```
+
+Публикация (токен совпадает с `REGISTRY_WRITE_TOKEN` на сервере реестра):
+
+```bash
+export SKILLGET_REGISTRY_URL=http://localhost:3000/api/v1
+export SKILLGET_REGISTRY_TOKEN=your-write-token
+skillget publish --name my-skill --skill-version 1.0.0 --description "..." --author team ./bundle.tar.gz
+# или полный manifest JSON:
+skillget publish --manifest ./manifest.json ./bundle.tar.gz
+```
+
+## Переменные окружения
+
+| Переменная | Назначение |
+|------------|------------|
+| `SKILLGET_REGISTRY_URL` | База API реестра (по умолчанию `https://registry.skpkg.org/api/v1`) |
+| `SKPKG_REGISTRY_URL` | Устаревший fallback для URL |
+| `SKILLGET_REGISTRY_TOKEN` | Bearer для `publish` (предпочтительно) |
+| `SKILLGET_TOKEN` | Короткий алиас для того же |
+
+При ошибках HTTP CLI добавляет короткие **hint** (401 / 404 / 410 / 409 / 503).
+
+## Прототип на TypeScript
 
 ```bash
 npm install
@@ -45,19 +105,9 @@ npm run build
 node dist/cli.js --help
 ```
 
-Against a local registry (e.g. MVP app):
+Целевой поставляемый клиент для экосистемы getskillpack — **скомпилированный `skillget` на Go**; npm остаётся опциональным.
 
-```bash
-export SKILLGET_REGISTRY_URL=http://localhost:3000/api/v1
-skillget search
-skillget install alpha-test-skill
-```
-
-Default registry base is `https://registry.skpkg.org/api/v1`. Override with **`SKILLGET_REGISTRY_URL`**; **`SKPKG_REGISTRY_URL`** is still read as a legacy fallback.
-
-After `install`, the CLI writes or merges **`skills.lock`** in the current working directory (pinned skill versions).
-
-Default install path for archives: `./.skillget/skills/<name>/<version>/`.
+После `install` создаётся или обновляется **`skills.lock`** в текущей директории. Архив по умолчанию: `./.skillget/skills/<name>/<version>/`.
 
 ## Publish to GitHub
 
@@ -80,4 +130,3 @@ git push -u origin main
 - Установка skill в Paperclip (board): [docs/PAPERCLIP_SKILL_INSTALL_RU.md](docs/PAPERCLIP_SKILL_INSTALL_RU.md).
 - **Куда board вводит PAT:** [docs/BOARD_PAT_QUICK_RU.md](docs/BOARD_PAT_QUICK_RU.md).
 - Репозитории org для агентов: [docs/AGENT_GITHUB_REPO_WORKFLOW_RU.md](docs/AGENT_GITHUB_REPO_WORKFLOW_RU.md).
-- Позиционирование, лендинг, KPI роста GitHub (без спама): [docs/MARKETING_LANDING_AND_GROWTH_RU.md](docs/MARKETING_LANDING_AND_GROWTH_RU.md).
