@@ -32,10 +32,10 @@ Default install path for archives: `./.skillget/skills/<name>/<version>/`.
 
 ## Publish to GitHub
 
-Org: [getskillpack](https://github.com/getskillpack). Suggested repo name: `cli` or `skpkg-cli` (folder name may differ from the `skillget` command).
+Org: [getskillpack](https://github.com/getskillpack). Каноническое имя репозитория на GitHub: **`cli`** (`getskillpack/cli`). Локальная папка в workspace Paperclip может называться `skpkg-cli` по истории — это не меняет remote.
 
 ```bash
-cd skpkg-cli
+cd cli   # или ваша локальная папка клона, например skpkg-cli
 git init
 git add .
 git commit -m "Initial skillget CLI scaffold"
