@@ -42,6 +42,7 @@ Clone the repo and open `examples/README.md` for a short index.
 
 ## Related
 
+- [Zero to first skill](ZERO_TO_FIRST_SKILL.md) — end-to-end tutorial for newcomers.
 - [Quick start](QUICKSTART.md) — build, env vars, search / install.
 - [Publish your own skill](PUBLISH_YOUR_SKILL.md) — tarball layout and `skillget publish`.
 - Registry contract: [getskillpack/registry — API.md](https://github.com/getskillpack/registry/blob/main/API.md).

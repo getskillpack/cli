@@ -2,6 +2,8 @@
 
 This guide is the **user-facing entry point** for the command-line client of the [getskillpack](https://github.com/getskillpack) skill registry.
 
+**New here?** Follow the guided path first: [Zero to first skill](ZERO_TO_FIRST_SKILL.md) (install → search → install → verify, with troubleshooting).
+
 ## What you need
 
 - **Go 1.22+** if you build the native binary from this repository.

@@ -6,6 +6,7 @@ Command-line client for the [getskillpack](https://github.com/getskillpack) skil
 
 ## User docs (English)
 
+- **[Zero → first skill (tutorial)](docs/ZERO_TO_FIRST_SKILL.md)** — numbered path from install through first `install` and verification; copy-paste blocks; troubleshooting for the three most common failures.
 - **[Quick start](docs/QUICKSTART.md)** — build, env vars, `search` / `install` / `config`.
 - **[Example skill catalog](docs/EXAMPLE_SKILL_CATALOG.md)** — CLI discovery plus five example packs under `examples/`.
 - **[Publish your own skill](docs/PUBLISH_YOUR_SKILL.md)** — tarball layout, manifest, and `skillget publish` (aligned with `getskillpack/cli` and this repo’s prototype).
