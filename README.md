@@ -18,7 +18,7 @@ Official CLI for the [getskillpack](https://github.com/getskillpack) skill regis
 npm install -g @getskillpack/cli && skillget search
 ```
 
-Build from Go source instead? See **Установка (канон)** below (`go build` + `skillget config`) or [Quick start](docs/QUICKSTART.md).
+Build from Go source instead? See **Install** below (`go build` + `skillget config`) or [Quick start](docs/QUICKSTART.md).
 
 **Docs (start here)**
 
@@ -34,71 +34,77 @@ Build from Go source instead? See **Установка (канон)** below (`go
 | Discover + pin | registry + lockfile | **`skillget search` / `install` + `skills.lock`** |
 | On-disk tree | `node_modules` / site-packages / `vendor` | **`.skillget/skills/<name>/<version>/`** |
 
-Expanded matrix (scopes, auth, CI patterns) lives in a dedicated doc in this repo as that work lands; positioning context: [MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md). Hands-on discovery: [Example skill catalog](docs/EXAMPLE_SKILL_CATALOG.md).
+Expanded positioning and growth framing (maintainers): [docs/MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md) · [docs/README.md](docs/README.md) (full index). Hands-on discovery: [Example skill catalog](docs/EXAMPLE_SKILL_CATALOG.md).
 
 **If this is useful:** starring [`getskillpack/cli`](https://github.com/getskillpack/cli), [`getskillpack/registry`](https://github.com/getskillpack/registry), and [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) helps discovery — no bots or reciprocal schemes; see [docs/MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md).
 
-**Public landing (hero + funnel copy):** [getskillpack.github.io/landing/](https://getskillpack.github.io/landing/) · source mirror: [docs/landing/](docs/landing/).
+**Public landing:** [getskillpack.github.io/landing/](https://getskillpack.github.io/landing/) · source mirror in this repo: [docs/landing/](docs/landing/).
 
 ## User docs (English)
 
-- **[Zero → first skill (tutorial)](docs/ZERO_TO_FIRST_SKILL.md)** — numbered path from install through first `install` and verification; copy-paste blocks; troubleshooting for the three most common failures.
+- **[Zero → first skill (tutorial)](docs/ZERO_TO_FIRST_SKILL.md)** — install through first `skillget install` and verification; copy-paste blocks; common failures.
 - **[Quick start](docs/QUICKSTART.md)** — build, env vars, `search` / `install` / `config`.
 - **[Example skill catalog](docs/EXAMPLE_SKILL_CATALOG.md)** — CLI discovery plus five example packs under `examples/`.
-- **[Publish your own skill](docs/PUBLISH_YOUR_SKILL.md)** — tarball layout, manifest, and `skillget publish` (aligned with `getskillpack/cli` and this repo’s prototype).
-- **[Release process](docs/RELEASE.md)** — semver, tags, changelog, alignment with registry API.
+- **[Publish your own skill](docs/PUBLISH_YOUR_SKILL.md)** — tarball layout, manifest, and `skillget publish`.
+- **[Release process](docs/RELEASE.md)** — semver, tags, changelog, alignment with the registry API.
 - **[Changelog](CHANGELOG.md)** — version history ([Keep a Changelog](https://keepachangelog.com/en/1.1.0/)).
+- **[Documentation index](docs/README.md)** — maintainer- and growth-oriented material (optional read).
 
-## Лендинг
+## Landing
 
-- **Публичный сайт (GitHub Pages):** репозиторий **[getskillpack/landing](https://github.com/getskillpack/landing)** (публичный) — канонический URL **`https://getskillpack.github.io/landing/`**. Зеркало статики: каталог **`docs/`** в репо `landing` (ветка `main`, источник Pages — `/docs`). Копируйте из [docs/landing/](docs/landing/) в [`getskillpack/landing` → `docs/`](https://github.com/getskillpack/landing/tree/main/docs). В `cli` при публичном репо остаётся опциональный [.github/workflows/deploy-landing.yml](.github/workflows/deploy-landing.yml).
-- **Тексты и KPI (EN, для board/публичики):** [docs/MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md) · внутренний зеркальный документ: [docs/MARKETING_LANDING_AND_GROWTH_RU.md](docs/MARKETING_LANDING_AND_GROWTH_RU.md).
+- **Public site (GitHub Pages):** [`getskillpack/landing`](https://github.com/getskillpack/landing) — canonical URL **https://getskillpack.github.io/landing/**. Pages are built from the `docs/` folder on `main`. Source mirror in this repo: [docs/landing/](docs/landing/). Optional workflow: [.github/workflows/deploy-landing.yml](.github/workflows/deploy-landing.yml).
 
-## Демо установки (визуально)
+## Install demo (visual)
 
-Пример сессии в терминале (как «скриншот» для README):
+Terminal session preview:
 
-![skillget: search и install](docs/landing/terminal-demo.svg)
+![skillget: search and install](docs/landing/terminal-demo.svg)
 
-Интерактивно в терминале: `asciinema play docs/asciinema/skillget-quickstart.cast` (подробности в разделе **Нативный бинарник (Go 1.22+)** ниже).
+With [asciinema](https://asciinema.org/docs/installation) locally:
 
-## Репозитории продукта (org)
+```bash
+asciinema play docs/asciinema/skillget-quickstart.cast
+```
 
-| Репозиторий | Назначение |
-|-------------|------------|
-| [registry](https://github.com/getskillpack/registry) | Контракт API и код реестра |
-| [skillget-manager](https://github.com/getskillpack/skillget-manager) | Lockfile, HTTP-клиент, установка, **publish** |
-| [cli](https://github.com/getskillpack/cli) | Бинарь `skillget` (Go) и опционально npm-пакет |
+Recording source: [`docs/asciinema/skillget-quickstart.cast`](docs/asciinema/skillget-quickstart.cast).
 
-## Установка (канон)
+## Product repositories
+
+| Repository | Role |
+|------------|------|
+| [registry](https://github.com/getskillpack/registry) | Registry API and implementation |
+| [skillget-manager](https://github.com/getskillpack/skillget-manager) | Lockfile, HTTP client, install path, **publish** |
+| [cli](https://github.com/getskillpack/cli) | `skillget` binary (Go) and optional npm package |
+
+## Install
 
 ### npm (Node 18+)
 
-Пакет **`@getskillpack/cli`**, бинарь на PATH: **`skillget`**.
+Package **`@getskillpack/cli`**, binary on PATH: **`skillget`**.
 
 ```bash
 npm install -g @getskillpack/cli
 skillget --help
 ```
 
-### Homebrew (из исходников)
+### Homebrew (from source)
 
-Формула-шаблон: [`packaging/homebrew/skillget.rb`](packaging/homebrew/skillget.rb). После публикации tap org **getskillpack**:
+Formula template: [`packaging/homebrew/skillget.rb`](packaging/homebrew/skillget.rb). After the org tap is published:
 
 ```bash
 brew tap getskillpack/tap
 brew install skillget
 ```
 
-Локально из клона:
+From a local clone:
 
 ```bash
 brew install --build-from-source ./packaging/homebrew/skillget.rb
 ```
 
-### Нативный бинарник (Go 1.22+)
+### Native binary (Go 1.22+)
 
-Исходники: `cmd/skillget`. Зависимость: [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) пин в `go.mod` (semver). Пока репозитории org приватные, перед `go build` / `go test` задайте `GOPRIVATE` и доступ Git к GitHub — см. [docs/BOARD_PAT_QUICK_RU.md](docs/BOARD_PAT_QUICK_RU.md) § 4.
+Sources: `cmd/skillget`. Dependency: [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager), pinned in `go.mod` (semver). For local development this repo may use a `replace` directive — see the comment in `go.mod`. If you vendor private module paths, set `GOPRIVATE` accordingly.
 
 ```bash
 go build -o skillget ./cmd/skillget
@@ -106,41 +112,31 @@ go build -o skillget ./cmd/skillget
 ./skillget config
 ```
 
-#### Быстрый старт (первый запуск за пару минут)
+#### Quick start (first run in a few minutes)
 
 ```bash
 git clone https://github.com/getskillpack/cli.git && cd cli
 go build -o skillget ./cmd/skillget
 ./skillget config
-# Публичный реестр по умолчанию: https://registry.skpkg.org/api/v1
-export SKILLGET_REGISTRY_URL=http://localhost:8080/api/v1   # локальный registry
+# Public default registry: https://registry.skpkg.org/api/v1
+export SKILLGET_REGISTRY_URL=http://localhost:8080/api/v1   # local registry
 ./skillget list
-./skillget install <имя-скилла>
+./skillget install <skill-name>
 ```
 
-После `install` появятся **`skills.lock`** и **`.skillget/skills/<name>/<version>/`**.
+After `install` you get **`skills.lock`** and **`.skillget/skills/<name>/<version>/`**.
 
-#### Демо в терминале (asciinema)
+## Commands
 
-Локально (нужен [asciinema](https://asciinema.org/docs/installation)):
+| Command | Purpose |
+|---------|---------|
+| `skillget list [query]` | List / search registry (`GET /skills`, optional `-author`) |
+| `skillget search [query]` | Same as `list` |
+| `skillget install <name\|name@version>` | Fetch archive, update `skills.lock` |
+| `skillget publish … <archive.tar.gz>` | Upload version (`POST /skills`, token required) |
+| `skillget config` | Show registry base URL and write-token presence |
 
-```bash
-asciinema play docs/asciinema/skillget-quickstart.cast
-```
-
-Исходник записи: [`docs/asciinema/skillget-quickstart.cast`](docs/asciinema/skillget-quickstart.cast). После выкладки ролика на asciinema.org board может добавить бейдж вида `[![asciicast](https://asciinema.org/a/<id>.svg)](https://asciinema.org/a/<id>)` в этот раздел.
-
-## Команды
-
-| Команда | Назначение |
-|---------|------------|
-| `skillget list [query]` | Список / поиск в реестре (`GET /skills`, опционально `-author`) |
-| `skillget search [query]` | То же, что `list` |
-| `skillget install <name\|name@version>` | Скачать архив, обновить `skills.lock` |
-| `skillget publish … <archive.tar.gz>` | Залить версию (`POST /skills`, нужен токен) |
-| `skillget config` | Показать базовый URL реестра и наличие write-токена |
-
-### Примеры
+### Examples
 
 ```bash
 export SKILLGET_REGISTRY_URL=http://localhost:3000/api/v1
@@ -149,28 +145,28 @@ skillget search para --limit 10
 skillget install alpha-test-skill
 ```
 
-Публикация (токен совпадает с `REGISTRY_WRITE_TOKEN` на сервере реестра):
+Publish (token matches `REGISTRY_WRITE_TOKEN` on the registry):
 
 ```bash
 export SKILLGET_REGISTRY_URL=http://localhost:3000/api/v1
 export SKILLGET_REGISTRY_TOKEN=your-write-token
 skillget publish --name my-skill --skill-version 1.0.0 --description "..." --author team ./bundle.tar.gz
-# или полный manifest JSON:
+# or full manifest JSON:
 skillget publish --manifest ./manifest.json ./bundle.tar.gz
 ```
 
-## Переменные окружения
+## Environment variables
 
-| Переменная | Назначение |
-|------------|------------|
-| `SKILLGET_REGISTRY_URL` | База API реестра (по умолчанию `https://registry.skpkg.org/api/v1`) |
-| `SKPKG_REGISTRY_URL` | Устаревший fallback для URL |
-| `SKILLGET_REGISTRY_TOKEN` | Bearer для `publish` (предпочтительно) |
-| `SKILLGET_TOKEN` | Короткий алиас для того же |
+| Variable | Purpose |
+|----------|---------|
+| `SKILLGET_REGISTRY_URL` | Registry API base (default `https://registry.skpkg.org/api/v1`) |
+| `SKPKG_REGISTRY_URL` | Legacy URL fallback |
+| `SKILLGET_REGISTRY_TOKEN` | Bearer for `publish` (preferred) |
+| `SKILLGET_TOKEN` | Short alias for the same |
 
-При ошибках HTTP CLI добавляет короткие **hint** (401 / 404 / 410 / 409 / 503).
+On HTTP errors the CLI prints short **hints** (401 / 404 / 410 / 409 / 503).
 
-## Прототип на TypeScript
+## TypeScript prototype
 
 ```bash
 npm install
@@ -178,16 +174,14 @@ npm run build
 node dist/cli.js --help
 ```
 
-Целевой поставляемый клиент для экосистемы getskillpack — **скомпилированный `skillget` на Go**; npm остаётся опциональным.
+The shipped client for the ecosystem is the **compiled Go `skillget`**; npm remains optional.
 
-После `install` создаётся или обновляется **`skills.lock`** в текущей директории. Архив по умолчанию: `./.skillget/skills/<name>/<version>/`.
+## Publish this repo to GitHub
 
-## Publish to GitHub
-
-Org: [getskillpack](https://github.com/getskillpack). Каноническое имя репозитория на GitHub: **`cli`** (`getskillpack/cli`). Локальная папка в workspace Paperclip может называться `skpkg-cli` по истории — это не меняет remote.
+Org: [getskillpack](https://github.com/getskillpack). Canonical repo name: **`cli`** (`getskillpack/cli`). If your local folder is still named `skpkg-cli` for historical reasons, the remote is unchanged.
 
 ```bash
-cd cli   # или ваша локальная папка клона, например skpkg-cli
+cd cli   # or your clone directory, e.g. skpkg-cli
 git init
 git add .
 git commit -m "Initial skillget CLI scaffold"
@@ -203,11 +197,7 @@ MIT — see [LICENSE](LICENSE).
 
 Coordinated disclosure: [SECURITY.md](SECURITY.md).
 
-## Related
+## Related (public)
 
-- **Registry API (канон):** [docs/registry-api.md](https://github.com/getskillpack/registry/blob/main/docs/registry-api.md); на развёрнутом реестре: `GET /docs/registry-api` (Markdown). Корневой [API.md](https://github.com/getskillpack/registry/blob/main/API.md) — короткий указатель для старых ссылок.
-- GitHub org **getskillpack** (onboarding [XDE-3](/XDE/issues/XDE-3)).
-- PAT / CI / scope: [docs/GETSKILLPACK_GITHUB_ORG.md](docs/GETSKILLPACK_GITHUB_ORG.md) ([XDE-10](/XDE/issues/XDE-10)).
-- Установка skill в Paperclip (board): [docs/PAPERCLIP_SKILL_INSTALL_RU.md](docs/PAPERCLIP_SKILL_INSTALL_RU.md).
-- **Куда board вводит PAT:** [docs/BOARD_PAT_QUICK_RU.md](docs/BOARD_PAT_QUICK_RU.md).
-- Репозитории org для агентов: [docs/AGENT_GITHUB_REPO_WORKFLOW_RU.md](docs/AGENT_GITHUB_REPO_WORKFLOW_RU.md).
+- **Registry API:** [docs/registry-api.md](https://github.com/getskillpack/registry/blob/main/docs/registry-api.md); on a deployed registry: `GET /docs/registry-api` (Markdown). Short pointer: [API.md](https://github.com/getskillpack/registry/blob/main/API.md).
+- **Organization:** [github.com/getskillpack](https://github.com/getskillpack).
