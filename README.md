@@ -5,6 +5,8 @@ Command-line client for the [getskillpack](https://github.com/getskillpack) skil
 ## User docs (English)
 
 - **[Quick start](docs/QUICKSTART.md)** — build, env vars, `search` / `install` / `config`.
+- **[Example skill catalog](docs/EXAMPLE_SKILL_CATALOG.md)** — CLI discovery plus five example packs under `examples/`.
+- **[Publish your own skill](docs/PUBLISH_YOUR_SKILL.md)** — tarball layout, manifest, and `skillget publish` (aligned with `getskillpack/cli` and this repo’s prototype).
 - **[Release process](docs/RELEASE.md)** — semver, tags, changelog, alignment with registry API.
 - **[Changelog](CHANGELOG.md)** — version history ([Keep a Changelog](https://keepachangelog.com/en/1.1.0/)).
 

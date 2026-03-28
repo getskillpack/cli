@@ -61,6 +61,8 @@ skillget install alpha-test-skill
 skillget install alpha-test-skill@1.2.3
 ```
 
+See also [Example skill catalog](EXAMPLE_SKILL_CATALOG.md) (registry discovery and example packs in `examples/`).
+
 After `install`, the working directory gets:
 
 - **`skills.lock`** — pinned versions.
