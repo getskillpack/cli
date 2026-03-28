@@ -1,0 +1,22 @@
+# Live HTTP check against the default public registry (not run on every push — see workflow go.yml + go test -short).
+name: Registry smoke (live)
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Mondays 14:00 UTC — visibility when production registry is down without blocking main CI
+    - cron: "0 14 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  public-registry-search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+      - name: SearchSkills integration (no -short)
+        run: go test -mod=vendor -count=1 -v ./cmd/skillget/ -run TestPublicRegistrySearchSkillsIntegration
