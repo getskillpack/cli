@@ -12,8 +12,20 @@ permissions:
 jobs:
   skillget:
     runs-on: ubuntu-latest
+    env:
+      GOPRIVATE: github.com/getskillpack/*
+      GONOSUMDB: github.com/getskillpack/*
     steps:
       - uses: actions/checkout@v4
+      - name: Auth GitHub for private Go modules
+        env:
+          TOKEN: ${{ secrets.GETSKILLPACK_ORG_PAT }}
+        run: |
+          if [ -z "${TOKEN}" ]; then
+            echo "Secret GETSKILLPACK_ORG_PAT is required (private org modules). See docs/BOARD_PAT_QUICK_RU.md § 1." >&2
+            exit 1
+          fi
+          git config --global url."https://x-access-token:${TOKEN}@github.com/".insteadOf "https://github.com/"
       - uses: actions/setup-go@v5
         with:
           go-version: "1.22"

@@ -40,3 +40,24 @@ GitHub → ваш репозиторий → **Settings** → **Secrets and vari
 - не «поле в skill» в библиотеке компании.
 
 Подробнее: [PAPERCLIP_SKILL_INSTALL_RU.md](PAPERCLIP_SKILL_INSTALL_RU.md), [GETSKILLPACK_GITHUB_ORG.md](GETSKILLPACK_GITHUB_ORG.md).
+
+## 4. Go modules (`skillget` / `go build` без `replace`)
+
+Пока репозитории org **приватные**, публичный `proxy.golang.org` не отдаёт zip модуля. Нужно:
+
+1. **Обход прокси для org:**  
+   `export GOPRIVATE=github.com/getskillpack/*`  
+   и отключить checksum DB для этих путей (иначе `sum.golang.org` не найдёт запись):  
+   `export GONOSUMDB=github.com/getskillpack/*`
+
+2. **Доступ `git` к GitHub** при `go get` / `go build` (clone по HTTPS): тот же PAT, что и для API — например `~/.netrc`:
+
+   ```
+   machine github.com
+   login x-access-token
+   password ghp_…
+   ```
+
+   Права на файл: `chmod 600 ~/.netrc`. Альтернатива — SSH remote и `insteadOf` (см. документацию GitHub).
+
+3. После публикации модуля в **публичный** proxy можно убрать `GOPRIVATE` для `skillget-manager` и пиноваться обычным `go get …@v0.1.0` без локального `replace`.

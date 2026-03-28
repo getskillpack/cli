@@ -98,7 +98,7 @@ brew install --build-from-source ./packaging/homebrew/skillget.rb
 
 ### Нативный бинарник (Go 1.22+)
 
-Исходники: `cmd/skillget`. Зависимость: [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) (в этом workspace при необходимости используется `replace` в `go.mod` — см. комментарий в файле).
+Исходники: `cmd/skillget`. Зависимость: [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) пин в `go.mod` (semver). Пока репозитории org приватные, перед `go build` / `go test` задайте `GOPRIVATE` и доступ Git к GitHub — см. [docs/BOARD_PAT_QUICK_RU.md](docs/BOARD_PAT_QUICK_RU.md) § 4.
 
 ```bash
 go build -o skillget ./cmd/skillget
