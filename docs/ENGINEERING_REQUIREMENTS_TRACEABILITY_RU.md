@@ -31,5 +31,6 @@
 
 ## Связанные документы в этом репозитории
 
+- Runbook прод-операций реестра (хостинг, эксплуатация): [`REFERENCE_REGISTRY_OPERATIONS_RU.md`](https://github.com/getskillpack/registry/blob/main/docs/REFERENCE_REGISTRY_OPERATIONS_RU.md) в [getskillpack/registry](https://github.com/getskillpack/registry).
 - [AGENT_GITHUB_REPO_WORKFLOW_RU.md](AGENT_GITHUB_REPO_WORKFLOW_RU.md) — как пушить и оформлять PR в org **getskillpack**.
 - Архитектурное мемо: [XDE-43](/XDE/issues/XDE-43).

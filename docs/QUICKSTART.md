@@ -27,6 +27,7 @@ Default registry: `https://registry.skpkg.org/api/v1`. Narrative and positioning
 Registry HTTP contracts and stability notes live in the **`getskillpack/registry`** repository:
 
 - [API.md](https://github.com/getskillpack/registry/blob/main/API.md)
+- [REFERENCE_REGISTRY_OPERATIONS_RU.md](https://github.com/getskillpack/registry/blob/main/docs/REFERENCE_REGISTRY_OPERATIONS_RU.md) — прод-хостинг и операции реестра (runbook для операторов и мейнтейнеров)
 
 The Go CLI delegates protocol details to [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager). Env vars, routes, and expected HTTP status codes for the compiled client are documented in **[REGISTRY_CLIENT_CONTRACT.md](https://github.com/getskillpack/skillget-manager/blob/main/docs/REGISTRY_CLIENT_CONTRACT.md)**; the CLI does not fork that behavior. Keep CLI releases aligned with registry and manager semver / changelog when behavior changes.
 
