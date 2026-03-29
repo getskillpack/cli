@@ -1,2 +1,4 @@
-github.com/getskillpack/skillget-manager v0.1.3 h1:avVsRsf6UVCgmznxOwmPT9Y3pXJAhTFPTRFou5d+wCA=
-github.com/getskillpack/skillget-manager v0.1.3/go.mod h1:XDmEMMPsIni59OVQLAYlNXZqAZE7smTmj4Djsx8Gr54=
+github.com/getskillpack/skillget-manager v0.1.4 h1:Qc5uvKCKWeG22MxI6u1dNKG2QDvNG7zDAyXW9c91jzo=
+github.com/getskillpack/skillget-manager v0.1.4/go.mod h1:nuCuVtegzpePhhGfsqGlLiHBwg6NIgauqaNKPfK4I8E=
+golang.org/x/mod v0.23.0 h1:Zb7khfcRGKk+kqfxFaP5tZqCnDZMjC5VtUBs87Hr6QM=
+golang.org/x/mod v0.23.0/go.mod h1:6SkKJ3Xj0I0BrPOZoBy3bdMptDDU9oJrpohJ3eWZ1fY=

@@ -1,3 +1,6 @@
-# github.com/getskillpack/skillget-manager v0.1.3
-## explicit; go 1.22
+# github.com/getskillpack/skillget-manager v0.1.4
+## explicit; go 1.22.0
 github.com/getskillpack/skillget-manager
+# golang.org/x/mod v0.23.0
+## explicit; go 1.22.0
+golang.org/x/mod/semver
