@@ -20,7 +20,7 @@ Org-wide visibility checklist (repos, visibility, legal): [PRIVATE_REPO_PUBLIC_R
 
 ## Before you cut a release
 
-1. **Contracts** — Confirm HTTP shapes and breaking changes with the registry contract in [`getskillpack/registry` API.md](https://github.com/getskillpack/registry/blob/main/API.md) and with [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) releases if the CLI behavior depends on new APIs.
+1. **Contracts** — Confirm HTTP shapes and breaking changes with the registry contract in [`getskillpack/registry` API.md](https://github.com/getskillpack/registry/blob/main/API.md), with the embedded registry client contract in [`skillget-manager` REGISTRY_CLIENT_CONTRACT.md](https://github.com/getskillpack/skillget-manager/blob/main/docs/REGISTRY_CLIENT_CONTRACT.md), and with [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) releases if the CLI behavior depends on new APIs.
 2. **Changelog** — Move items from `## [Unreleased]` to a dated `## [X.Y.Z] - YYYY-MM-DD` section in `CHANGELOG.md`.
 3. **Version bump** — Set the **same** version string in all of:
    - [VERSION](../VERSION) (single line, no `v` prefix)

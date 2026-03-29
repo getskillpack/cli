@@ -11,6 +11,7 @@ For **user-facing release notes** (RU/EN block per version) and **growth handoff
 
 ### Changed
 
+- [RELEASE.md](docs/RELEASE.md): в чеклисте «Before you cut a release» добавлена явная ссылка на [REGISTRY_CLIENT_CONTRACT.md](https://github.com/getskillpack/skillget-manager/blob/main/docs/REGISTRY_CLIENT_CONTRACT.md) рядом с registry API и релизами `skillget-manager`.
 - README and [docs/QUICKSTART.md](docs/QUICKSTART.md): explicit **~60 second** npm quickstart (config → list → install), links to [registry.skpkg.org](https://registry.skpkg.org/) and [landing](https://getskillpack.github.io/landing/); Go CLI examples use `-limit` instead of `--limit` for `list` / `search`.
 
 ### Added
