@@ -67,10 +67,12 @@ Usage:
 Subcommand flags: skillget <command> -h
 
 Environment:
-  SKILLGET_REGISTRY_URL   registry API base (optional)
-  SKPKG_REGISTRY_URL      legacy fallback for registry URL
-  SKILLGET_REGISTRY_TOKEN bearer token for skillget publish (or SKILLGET_TOKEN)
-                          search/install work anonymously unless the registry requires auth
+  SKILLGET_REGISTRY_URL        registry API base (optional)
+  SKPKG_REGISTRY_URL           legacy fallback for registry URL
+  SKILLGET_REGISTRY_READ_TOKEN bearer for read-only registries (GET API + archive_url);
+                               if unset, falls back to the write token when set
+  SKILLGET_REGISTRY_TOKEN      bearer for skillget publish (or SKILLGET_TOKEN)
+                               search/install use anonymous GETs unless a read/write token is set
 
 `)
 }
@@ -218,6 +220,14 @@ func runConfig(args []string) error {
 	fmt.Printf("source: %s\n", src)
 	if src == "default" {
 		fmt.Println("override: export SKILLGET_REGISTRY_URL=… (or legacy SKPKG_REGISTRY_URL)")
+	}
+	switch {
+	case os.Getenv("SKILLGET_REGISTRY_READ_TOKEN") != "":
+		fmt.Println("read bearer: set (SKILLGET_REGISTRY_READ_TOKEN)")
+	case skillgetmanager.RegistryToken() != "":
+		fmt.Println("read bearer: using write token (SKILLGET_REGISTRY_TOKEN / SKILLGET_TOKEN)")
+	default:
+		fmt.Println("read bearer: not set — anonymous reads (public registry default)")
 	}
 	tok := skillgetmanager.RegistryToken()
 	if tok != "" {
