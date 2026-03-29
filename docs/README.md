@@ -22,6 +22,7 @@ The files below describe org automation, tokens, cadence, and workflows. They ar
 | [AGENT_GITHUB_REPO_WORKFLOW_RU.md](AGENT_GITHUB_REPO_WORKFLOW_RU.md) | Agent/repo workflow (Russian) |
 | [ENGINEERING_REQUIREMENTS_TRACEABILITY_RU.md](ENGINEERING_REQUIREMENTS_TRACEABILITY_RU.md) | План ENGINEERING_REQUIREMENTS ↔ тикеты ↔ репо (Russian) |
 | [BOARD_PAT_QUICK_RU.md](BOARD_PAT_QUICK_RU.md) | PAT setup shorthand (Russian) |
+| [Registry: operations runbook (RU)](https://github.com/getskillpack/registry/blob/main/docs/REFERENCE_REGISTRY_OPERATIONS_RU.md) | Prod registry hosting and maintainer operations (`getskillpack/registry`) |
 | [PAPERCLIP_SKILL_INSTALL_RU.md](PAPERCLIP_SKILL_INSTALL_RU.md) | Skill install runbook (Russian) |
 | [PRIVATE_REPO_PUBLIC_RELEASE_CHECKLIST.md](PRIVATE_REPO_PUBLIC_RELEASE_CHECKLIST.md) | Pre-public checklist |
 | [MARKETING_LANDING_AND_GROWTH.md](MARKETING_LANDING_AND_GROWTH.md) | Positioning and KPIs |
