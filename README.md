@@ -39,6 +39,16 @@ Build from Go source instead? See **Install** below (`go build` + `skillget conf
 - **[Quick start](docs/QUICKSTART.md)** — env vars, `search` / `install` / `config`.
 - **Registry contract:** [registry-api.md](https://github.com/getskillpack/registry/blob/main/docs/registry-api.md) · **[Publish a skill](docs/PUBLISH_YOUR_SKILL.md)**.
 
+### Где что лежит (матрица, runbook, traceability)
+
+Короткие указатели для сопровождения экосистемы (детали только в целевых документах):
+
+- **Матрица совместимости** (CLI / skillget-manager / registry): [COMPATIBILITY_MATRIX_RU.md](docs/COMPATIBILITY_MATRIX_RU.md)
+- **Ops / runbook публичного registry** (`getskillpack/registry`): [PUBLIC_REGISTRY_RUNBOOK.md](https://github.com/getskillpack/registry/blob/main/docs/PUBLIC_REGISTRY_RUNBOOK.md)
+- **Traceability** (ENGINEERING_REQUIREMENTS ↔ тикеты ↔ репозитории): [ENGINEERING_REQUIREMENTS_TRACEABILITY_RU.md](docs/ENGINEERING_REQUIREMENTS_TRACEABILITY_RU.md)
+
+Полный индекс каталога `docs/`: [docs/README.md](docs/README.md).
+
 ### vs familiar package registries (short)
 
 | | npm · PyPI · Packagist | skillget / getskillpack |
@@ -47,7 +57,7 @@ Build from Go source instead? See **Install** below (`go build` + `skillget conf
 | Discover + pin | registry + lockfile | **`skillget search` / `install` + `skills.lock`** |
 | On-disk tree | `node_modules` / site-packages / `vendor` | **`.skillget/skills/<name>/<version>/`** |
 
-Expanded positioning and growth framing (maintainers): [docs/MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md) · [docs/README.md](docs/README.md) (full index). Hands-on discovery: [Example skill catalog](docs/EXAMPLE_SKILL_CATALOG.md).
+Expanded positioning and growth framing (maintainers): [docs/MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md). Hands-on discovery: [Example skill catalog](docs/EXAMPLE_SKILL_CATALOG.md).
 
 **If this is useful:** starring [`getskillpack/cli`](https://github.com/getskillpack/cli), [`getskillpack/registry`](https://github.com/getskillpack/registry), and [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager) helps discovery — no bots or reciprocal schemes; see [docs/MARKETING_LANDING_AND_GROWTH.md](docs/MARKETING_LANDING_AND_GROWTH.md).
 
