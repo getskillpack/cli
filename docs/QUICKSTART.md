@@ -15,7 +15,7 @@ Registry HTTP contracts and stability notes live in the **`getskillpack/registry
 
 - [API.md](https://github.com/getskillpack/registry/blob/main/API.md)
 
-The Go CLI delegates protocol details to [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager). Keep CLI releases aligned with registry and manager semver / changelog when behavior changes.
+The Go CLI delegates protocol details to [`getskillpack/skillget-manager`](https://github.com/getskillpack/skillget-manager). Env vars, routes, and expected HTTP status codes for the compiled client are documented in **[REGISTRY_CLIENT_CONTRACT.md](https://github.com/getskillpack/skillget-manager/blob/main/docs/REGISTRY_CLIENT_CONTRACT.md)**; the CLI does not fork that behavior. Keep CLI releases aligned with registry and manager semver / changelog when behavior changes.
 
 ## Build the native CLI
 
@@ -44,6 +44,8 @@ export SKILLGET_REGISTRY_URL=http://localhost:3000/api/v1
 ```
 
 `SKPKG_REGISTRY_URL` is still accepted as a **legacy** fallback.
+
+If the registry operator requires a bearer token for **read** access (`REGISTRY_READ_TOKEN` on the server), set `SKILLGET_REGISTRY_READ_TOKEN`. When it is unset but a write token is set (`SKILLGET_REGISTRY_TOKEN` or `SKILLGET_TOKEN`), the same bearer is used for GETs and archive downloads — see the contract linked above.
 
 ## Common commands
 
