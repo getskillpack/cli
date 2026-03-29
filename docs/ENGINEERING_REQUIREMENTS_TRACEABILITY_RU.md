@@ -1,6 +1,6 @@
 # Трассировка: `ENGINEERING_REQUIREMENTS_SKPKG` ↔ доставка
 
-Страница для команды и board: **где лежит канон инженерных требований** к Skill Manager / getskillpack и как закрытые инкременты по тикетам [XDE-84](/XDE/issues/XDE-84), [XDE-85](/XDE/issues/XDE-85), [XDE-87](/XDE/issues/XDE-87), [XDE-89](/XDE/issues/XDE-89), [XDE-90](/XDE/issues/XDE-90) отражены в репозиториях org **getskillpack**. Родительский документ требований в Paperclip: [XDE-15](/XDE/issues/XDE-15#document-engineering-requirements).
+Страница для команды и board: **где лежит канон инженерных требований** к Skill Manager / getskillpack и как закрытые инкременты по тикетам [XDE-84](/XDE/issues/XDE-84), [XDE-85](/XDE/issues/XDE-85), [XDE-87](/XDE/issues/XDE-87), [XDE-89](/XDE/issues/XDE-89), [XDE-90](/XDE/issues/XDE-90), [XDE-92](/XDE/issues/XDE-92) отражены в репозиториях org **getskillpack**. Родительский документ требований в Paperclip: [XDE-15](/XDE/issues/XDE-15#document-engineering-requirements).
 
 ## Где живёт план `ENGINEERING_REQUIREMENTS_SKPKG.md`
 
@@ -27,6 +27,7 @@
 | [XDE-87](/XDE/issues/XDE-87) | [getskillpack/cli](https://github.com/getskillpack/cli) | Выравнивание CLI с контрактом менеджера; [PR #2](https://github.com/getskillpack/cli/pull/2) → `main`, `skillget-manager` **v0.1.4** в `go.mod` / vendor. |
 | [XDE-89](/XDE/issues/XDE-89) | [getskillpack/cli](https://github.com/getskillpack/cli) | CI на `main`, [`docs/RELEASE.md`](https://github.com/getskillpack/cli/blob/main/docs/RELEASE.md), [`CHANGELOG.md`](https://github.com/getskillpack/cli/blob/main/CHANGELOG.md); пример фиксации: коммит [`c665522`](https://github.com/getskillpack/cli/commit/c665522). |
 | [XDE-90](/XDE/issues/XDE-90) | [getskillpack/registry](https://github.com/getskillpack/registry) | Сверка `API.md` / **Compiled core** с клиентским контрактом; коммиты на `main`, напр. [`77ea41c`](https://github.com/getskillpack/registry/commit/77ea41c), [`1e5f26c`](https://github.com/getskillpack/registry/commit/1e5f26c) (см. тред тикета). |
+| [XDE-92](/XDE/issues/XDE-92) | [getskillpack/cli](https://github.com/getskillpack/cli) | Автотесты краевых HTTP-кодов реестра (**401** / **404** / **410**) для клиента по [`REGISTRY_CLIENT_CONTRACT.md`](https://github.com/getskillpack/skillget-manager/blob/main/docs/REGISTRY_CLIENT_CONTRACT.md): [`cmd/skillget/registry_edge_responses_test.go`](https://github.com/getskillpack/cli/blob/main/cmd/skillget/registry_edge_responses_test.go); merge [PR #4](https://github.com/getskillpack/cli/pull/4) → `main`. |
 
 ## Связанные документы в этом репозитории
 
