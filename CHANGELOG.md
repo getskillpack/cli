@@ -9,6 +9,10 @@ For **user-facing release notes** (RU/EN block per version) and **growth handoff
 
 ## [Unreleased]
 
+### Changed
+
+- README and [docs/QUICKSTART.md](docs/QUICKSTART.md): explicit **~60 second** npm quickstart (config → list → install), links to [registry.skpkg.org](https://registry.skpkg.org/) and [landing](https://getskillpack.github.io/landing/); Go CLI examples use `-limit` instead of `--limit` for `list` / `search`.
+
 ### Added
 
 - Workflow **Registry smoke (live)** (`.github/workflows/registry-smoke.yml`): `workflow_dispatch` + weekly cron runs live `SearchSkills` + `DownloadSkillArchive` integration tests (`TestPublicRegistry.*Integration`) without `-short` to monitor production `registry.skpkg.org` without failing default PR/push CI.

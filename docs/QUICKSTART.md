@@ -4,6 +4,19 @@ This guide is the **user-facing entry point** for the command-line client of the
 
 **New here?** Follow the guided path first: [Zero to first skill](ZERO_TO_FIRST_SKILL.md) (install → search → install → verify, with troubleshooting).
 
+## npm install (~60 seconds)
+
+Requires **Node.js 18+**.
+
+```bash
+npm install -g @getskillpack/cli
+skillget config
+skillget list -limit 10
+skillget install para-memory-files
+```
+
+Default registry: `https://registry.skpkg.org/api/v1`. Narrative and positioning: [getskillpack.github.io/landing](https://getskillpack.github.io/landing/). If the install step 404s, run `skillget list` and pick a name from the output ([example catalog](EXAMPLE_SKILL_CATALOG.md)).
+
 ## What you need
 
 - **Go 1.22+** if you build the native binary from this repository.

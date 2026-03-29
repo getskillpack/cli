@@ -10,7 +10,7 @@ Default API base: `https://registry.skpkg.org/api/v1` (override with `SKILLGET_R
 skillget config
 skillget list
 skillget list para
-skillget search --limit 50
+skillget search -limit 50
 skillget install <name>
 skillget install <name>@<semver>
 ```

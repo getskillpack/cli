@@ -18,6 +18,19 @@ Official CLI for the [getskillpack](https://github.com/getskillpack) skill regis
 npm install -g @getskillpack/cli && skillget search
 ```
 
+### Quickstart (about 60 seconds)
+
+```bash
+npm install -g @getskillpack/cli
+skillget config
+skillget list -limit 10
+skillget install para-memory-files
+```
+
+- **Default registry API:** `https://registry.skpkg.org/api/v1` — browse **[registry.skpkg.org](https://registry.skpkg.org/)**; contract: [registry-api.md](https://github.com/getskillpack/registry/blob/main/docs/registry-api.md).
+- **Product narrative (hero + funnel):** **[getskillpack.github.io/landing](https://getskillpack.github.io/landing/)**.
+- If `para-memory-files` is not on the catalog you see, run `skillget list` (no query) and `skillget install <name>` for any listed skill — see [Example skill catalog](docs/EXAMPLE_SKILL_CATALOG.md).
+
 Build from Go source instead? See **Install** below (`go build` + `skillget config`) or [Quick start](docs/QUICKSTART.md).
 
 **Docs (start here)**
@@ -141,7 +154,7 @@ After `install` you get **`skills.lock`** and **`.skillget/skills/<name>/<versio
 ```bash
 export SKILLGET_REGISTRY_URL=http://localhost:3000/api/v1
 skillget list
-skillget search para --limit 10
+skillget search para -limit 10
 skillget install alpha-test-skill
 ```
 
