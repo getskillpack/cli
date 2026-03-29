@@ -21,6 +21,7 @@ The files below describe org automation, tokens, cadence, and workflows. They ar
 | [GETSKILLPACK_GITHUB_ORG.md](GETSKILLPACK_GITHUB_ORG.md) | PAT scopes and org hygiene |
 | [AGENT_GITHUB_REPO_WORKFLOW_RU.md](AGENT_GITHUB_REPO_WORKFLOW_RU.md) | Agent/repo workflow (Russian) |
 | [ENGINEERING_REQUIREMENTS_TRACEABILITY_RU.md](ENGINEERING_REQUIREMENTS_TRACEABILITY_RU.md) | План ENGINEERING_REQUIREMENTS ↔ тикеты ↔ репо (Russian) |
+| [COMPATIBILITY_MATRIX_RU.md](COMPATIBILITY_MATRIX_RU.md) | Матрица совместимости CLI / skillget-manager / registry (Russian) |
 | [BOARD_PAT_QUICK_RU.md](BOARD_PAT_QUICK_RU.md) | PAT setup shorthand (Russian) |
 | [Registry: operations runbook (RU)](https://github.com/getskillpack/registry/blob/main/docs/REFERENCE_REGISTRY_OPERATIONS_RU.md) | Prod registry hosting and maintainer operations (`getskillpack/registry`) |
 | [PAPERCLIP_SKILL_INSTALL_RU.md](PAPERCLIP_SKILL_INSTALL_RU.md) | Skill install runbook (Russian) |
