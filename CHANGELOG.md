@@ -20,7 +20,7 @@ For **user-facing release notes** (RU/EN block per version) and **growth handoff
 ### Changed
 
 - [RELEASE.md](docs/RELEASE.md): **Public launch readiness (CLI)** section (CI, docs funnel, live smoke, npm parity, publish vs automated token) and link to [docs/README.md](docs/README.md).
-- Dependency: `skillget-manager` **v0.1.3** (archive download transport/HTTP hints, README; keep in sync with manager releases).
+- Dependency: `skillget-manager` **v0.1.4** (registry compiled-core JSON: `versions` map + semver latest + optional read bearer; [REGISTRY_CLIENT_CONTRACT.md](https://github.com/getskillpack/skillget-manager/blob/main/docs/REGISTRY_CLIENT_CONTRACT.md)).
 - CLI: `skillget config -h` / `--help` and rejection of stray arguments on `config`.
 - CLI: `skillget <command> -h` / `--help` on `list`, `search`, `install`, and `publish` prints command-specific flags and exits 0 (was a generic error exit).
 - CI: committed `vendor/` for private `skillget-manager`; default **Go** workflow job builds with `-mod=vendor` **without** repository secrets (fork PRs included). Second job skips heavy steps when `GETSKILLPACK_ORG_PAT` is absent; with the secret it runs remote `go mod download` / build and checks `vendor/` matches `go.mod`.
