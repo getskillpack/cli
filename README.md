@@ -83,7 +83,7 @@ Terminal session preview:
 
 ![skillget: search and install](docs/landing/terminal-demo.svg)
 
-With [asciinema](https://asciinema.org/docs/installation) locally:
+With [asciinema](https://docs.asciinema.org/manual/cli/installation/) locally:
 
 ```bash
 asciinema play docs/asciinema/skillget-quickstart.cast
